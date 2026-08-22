@@ -1187,6 +1187,9 @@
     </div>
   </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="cloud-sync.js"></script>
   <script>
   // ============================================================
   // PORTFOLIO DATA - Loads from localStorage (set by admin)
@@ -2222,11 +2225,9 @@
   }
 
   // ============================================================
-  // INIT
+  // RENDER ALL — also used by realtime cloud updates
   // ============================================================
-  document.addEventListener('DOMContentLoaded', () => {
-    ThemeManager.init();
-    initNavbar();
+  function renderAll() {
     renderProfile();
     renderInterests();
     renderResearch();
@@ -2237,10 +2238,29 @@
     renderPublications();
     renderCertificates();
     renderAchievements();
+    ThemeManager.init();
+    // Re-run observers after dynamic content changes.
+    setTimeout(observeElements, 50);
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', async () => {
+    initNavbar();
     initContactForm();
     initModal();
     initHeroCanvas();
-    setTimeout(observeElements, 100);
+
+    // Load cloud data before the first render. If Supabase is not configured
+    // or unavailable, DataManager automatically falls back to local/default data.
+    if (window.PortfolioCloud) {
+      await window.PortfolioCloud.initPublic(DEFAULT_DATA, () => {
+        renderAll();
+      });
+    }
+
+    renderAll();
   });
   </script>
 </body>

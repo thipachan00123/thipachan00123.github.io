@@ -306,6 +306,24 @@
       width:44px; height:36px; border-radius:6px; cursor:pointer; padding:2px;
     }
 
+
+    /* CLOUD LOGIN - shown only when Supabase cloud sync is enabled */
+    #cloud-login {
+      display:none; position:fixed; inset:0; z-index:100000;
+      align-items:center; justify-content:center; padding:24px;
+      background:rgba(15,23,42,.92);
+    }
+    #cloud-login .cloud-login-card {
+      width:min(420px,100%); background:#fff; border-radius:16px;
+      padding:30px; box-shadow:0 24px 70px rgba(0,0,0,.35);
+    }
+    #cloud-login h2 { margin-bottom:8px; color:#0f172a; font-size:22px; }
+    #cloud-login p { color:#64748b; font-size:13px; line-height:1.6; margin-bottom:20px; }
+    #cloud-login label { display:block; font-size:12px; font-weight:700; color:#334155; margin:12px 0 6px; }
+    #cloud-login input { width:100%; padding:11px 12px; border:1px solid #cbd5e1; border-radius:8px; font:inherit; }
+    #cloud-login button { width:100%; margin-top:18px; padding:11px 14px; border:0; border-radius:8px; background:#2563eb; color:#fff; font-weight:700; cursor:pointer; }
+    #cloud-login-status { margin-top:12px; font-size:12px; color:#64748b; min-height:18px; }
+
     /* EMPTY STATE */
     .empty-state { text-align:center; padding:48px 24px; color:var(--text-muted); }
     .empty-state i { font-size:40px; opacity:0.4; display:block; margin-bottom:12px; }
@@ -313,6 +331,22 @@
   </style>
 </head>
 <body>
+
+<!-- CLOUD LOGIN (only appears after Supabase is configured) -->
+<div id="cloud-login" aria-hidden="true">
+  <div class="cloud-login-card">
+    <h2>Admin Login</h2>
+    <p>This portfolio uses secure cloud storage for permanent updates. Sign in with the admin account created in Supabase.</p>
+    <form id="cloud-login-form">
+      <label for="cloud-email">Email</label>
+      <input id="cloud-email" type="email" autocomplete="username" required />
+      <label for="cloud-password">Password</label>
+      <input id="cloud-password" type="password" autocomplete="current-password" required />
+      <button type="submit">Sign in &amp; continue</button>
+      <div id="cloud-login-status"></div>
+    </form>
+  </div>
+</div>
 
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
@@ -795,6 +829,9 @@
   </div>
 </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="cloud-sync.js"></script>
 <script>
 // ============================================================
 // DATA DEFAULTS
@@ -860,9 +897,22 @@ const DEFAULTS = {
 // STORE
 // ============================================================
 const Store = {
-  get(k) { try { const r=localStorage.getItem('portfolio_'+k); return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULTS[k]||[])); } catch(e) { return JSON.parse(JSON.stringify(DEFAULTS[k]||[])); } },
-  set(k,v) { localStorage.setItem('portfolio_'+k,JSON.stringify(v)); },
-  getAll() { return Object.keys(DEFAULTS).reduce((a,k)=>{a[k]=this.get(k);return a;},{}); }
+  get(k) {
+    try {
+      const r = localStorage.getItem('portfolio_'+k);
+      return r ? JSON.parse(r) : JSON.parse(JSON.stringify(DEFAULTS[k]||[]));
+    } catch(e) {
+      return JSON.parse(JSON.stringify(DEFAULTS[k]||[]));
+    }
+  },
+  set(k,v) {
+    // Keep the UI instant by writing locally first, then persist to the cloud.
+    localStorage.setItem('portfolio_'+k, JSON.stringify(v));
+    if (window.PortfolioCloud) window.PortfolioCloud.syncKey(k, v);
+  },
+  getAll() {
+    return Object.keys(DEFAULTS).reduce((a,k)=>{a[k]=this.get(k);return a;}, {});
+  }
 };
 
 // ============================================================
@@ -1621,9 +1671,98 @@ function updateBadges() {
 // ============================================================
 // INIT
 // ============================================================
-window.addEventListener('DOMContentLoaded', () => {
+
+// ============================================================
+// CLOUD SYNC BOOT
+// ============================================================
+const adminCloudLoaders = {
+  profile: loadProfileForm,
+  projects: renderProjectsTable,
+  research: renderResearchTable,
+  experience: renderExperienceTable,
+  education: renderEducationTable,
+  skills: renderSkillsAdmin,
+  certificates: renderCertsTable,
+  publications: renderPubsTable,
+  achievements: renderAchieveTable,
+  interests: renderInterestsTable,
+  social: renderSocialForm,
+  settings: loadSettingsForm
+};
+
+function refreshAdminAfterCloudUpdate(key) {
   loadDashboard();
   updateBadges();
+  const active = document.querySelector('.panel.active');
+  if (!active) return;
+  const name = active.id.replace('panel-', '');
+  if (adminCloudLoaders[name]) adminCloudLoaders[name]();
+}
+
+function setCloudLoginVisible(visible) {
+  const el = document.getElementById('cloud-login');
+  if (!el) return;
+  el.style.display = visible ? 'flex' : 'none';
+  el.setAttribute('aria-hidden', visible ? 'false' : 'true');
+}
+
+async function bootAdminCloud() {
+  // Without Supabase configuration the original localStorage mode remains available.
+  if (!window.PortfolioCloud || !window.PortfolioCloud.enabled()) {
+    loadDashboard();
+    updateBadges();
+    return;
+  }
+
+  const result = await window.PortfolioCloud.initAdmin(DEFAULTS, refreshAdminAfterCloudUpdate);
+
+  if (result.session) {
+    setCloudLoginVisible(false);
+    loadDashboard();
+    updateBadges();
+    return;
+  }
+
+  setCloudLoginVisible(true);
+}
+
+document.getElementById('cloud-login-form')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const status = document.getElementById('cloud-login-status');
+  const email = document.getElementById('cloud-email').value.trim();
+  const password = document.getElementById('cloud-password').value;
+  status.textContent = 'Signing in…';
+
+  const result = await window.PortfolioCloud.signIn(email, password);
+  if (result.error) {
+    status.textContent = result.error.message || 'Login failed.';
+    return;
+  }
+
+  try {
+    await window.PortfolioCloud.loadAdmin(DEFAULTS, refreshAdminAfterCloudUpdate);
+    setCloudLoginVisible(false);
+    loadDashboard();
+    updateBadges();
+    status.textContent = '';
+    showToast('Cloud sync connected successfully!');
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Could not load cloud data. Check the Supabase table and policies.';
+  }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  bootAdminCloud().catch(err => {
+    console.error('Cloud initialization failed:', err);
+    loadDashboard();
+    updateBadges();
+    if (window.PortfolioCloud && window.PortfolioCloud.enabled()) {
+      setCloudLoginVisible(true);
+      const status = document.getElementById('cloud-login-status');
+      if (status) status.textContent = 'Cloud initialization failed. Check your Supabase configuration.';
+    }
+  });
 });
 </script>
 </body>

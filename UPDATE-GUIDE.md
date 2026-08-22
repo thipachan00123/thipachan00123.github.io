@@ -203,3 +203,8 @@ If you're stuck, the safest approach is always:
 2. Make your changes
 3. Preview the result
 4. Export again as a new backup
+
+
+## ☁️ Permanent Cloud Saving
+
+This version uses Supabase for permanent storage and realtime synchronization. See `SUPABASE-SETUP.md` for the one-time setup.
