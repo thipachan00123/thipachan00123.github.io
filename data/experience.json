@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "organization": "Khulna University of Engineering & Technology",
+    "position": "Research Assistant (GIS Laboratory)",
+    "type": "Academic",
+    "startDate": "2024-01",
+    "endDate": "",
+    "current": true,
+    "location": "Khulna, Bangladesh",
+    "description": "Assisting in GIS-based research projects focusing on urban spatial analysis, flood risk mapping, and remote sensing data processing under faculty supervision.",
+    "responsibilities": [
+      "Conducting GIS data analysis and spatial modeling",
+      "Processing satellite imagery using Google Earth Engine",
+      "Preparing research reports and visualizations",
+      "Supporting senior researchers in fieldwork and data collection",
+      "Maintaining GIS database and project documentation"
+    ],
+    "achievements": [
+      "Contributed to flood susceptibility mapping research",
+      "Developed automated GIS data processing scripts"
+    ],
+    "skills": ["GIS", "Remote Sensing", "Google Earth Engine", "ArcGIS Pro", "Python", "Research"],
+    "logo": "",
+    "websiteUrl": "https://www.kuet.ac.bd"
+  },
+  {
+    "id": 2,
+    "organization": "Bangladesh Institute of Planners (BIP)",
+    "position": "Student Member",
+    "type": "Volunteer",
+    "startDate": "2023-06",
+    "endDate": "",
+    "current": true,
+    "location": "Dhaka, Bangladesh",
+    "description": "Active student member of the Bangladesh Institute of Planners, the national professional body for urban and regional planners in Bangladesh.",
+    "responsibilities": [
+      "Attending professional development workshops and seminars",
+      "Participating in national planning conferences",
+      "Networking with professional planners and researchers",
+      "Contributing to planning advocacy activities"
+    ],
+    "achievements": [
+      "Participated in National Urban Planning Conference 2023",
+      "Contributed to position paper on climate-resilient urban planning"
+    ],
+    "skills": ["Urban Planning", "Professional Development", "Networking", "Academic Writing"],
+    "logo": "",
+    "websiteUrl": "https://www.bip.org.bd"
+  },
+  {
+    "id": 3,
+    "organization": "KUET Urban Planning Club",
+    "position": "Executive Member",
+    "type": "Leadership",
+    "startDate": "2023-01",
+    "endDate": "",
+    "current": true,
+    "location": "Khulna, Bangladesh",
+    "description": "Leading initiatives and organizing academic events for the Urban Planning Club at KUET, including workshops, seminars, and field visits to planning sites.",
+    "responsibilities": [
+      "Organizing departmental events, workshops, and seminars",
+      "Managing club activities and member engagement",
+      "Coordinating with faculty for academic events",
+      "Representing student interests in departmental meetings"
+    ],
+    "achievements": [
+      "Successfully organized GIS workshop for 50+ students",
+      "Led urban field study visits to Dhaka and Khulna"
+    ],
+    "skills": ["Leadership", "Event Management", "Communication", "Team Coordination"],
+    "logo": "",
+    "websiteUrl": ""
+  }
+]

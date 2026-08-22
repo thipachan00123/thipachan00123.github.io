@@ -1,0 +1,9 @@
+[
+  { "platform": "LinkedIn", "url": "#", "icon": "fab fa-linkedin", "display": true, "order": 1 },
+  { "platform": "GitHub", "url": "#", "icon": "fab fa-github", "display": true, "order": 2 },
+  { "platform": "Google Scholar", "url": "#", "icon": "fas fa-graduation-cap", "display": true, "order": 3 },
+  { "platform": "ResearchGate", "url": "#", "icon": "fab fa-researchgate", "display": true, "order": 4 },
+  { "platform": "ORCID", "url": "#", "icon": "fas fa-id-card", "display": true, "order": 5 },
+  { "platform": "YouTube", "url": "#", "icon": "fab fa-youtube", "display": false, "order": 6 },
+  { "platform": "Facebook", "url": "#", "icon": "fab fa-facebook", "display": false, "order": 7 }
+]

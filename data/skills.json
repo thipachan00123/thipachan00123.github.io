@@ -1,0 +1,69 @@
+[
+  {
+    "category": "GIS & Spatial Analysis",
+    "icon": "fa-map",
+    "skills": [
+      { "name": "ArcGIS Pro", "level": "Advanced", "years": "3" },
+      { "name": "QGIS", "level": "Advanced", "years": "3" },
+      { "name": "Google Earth Engine", "level": "Intermediate", "years": "2" },
+      { "name": "ArcGIS Online", "level": "Intermediate", "years": "2" },
+      { "name": "Spatial Statistics", "level": "Intermediate", "years": "2" },
+      { "name": "Geostatistics", "level": "Beginner", "years": "1" }
+    ]
+  },
+  {
+    "category": "Remote Sensing",
+    "icon": "fa-satellite",
+    "skills": [
+      { "name": "ENVI", "level": "Intermediate", "years": "2" },
+      { "name": "Landsat Analysis", "level": "Intermediate", "years": "2" },
+      { "name": "Sentinel Data Processing", "level": "Intermediate", "years": "2" },
+      { "name": "NDVI Analysis", "level": "Advanced", "years": "2" },
+      { "name": "Image Classification", "level": "Intermediate", "years": "2" },
+      { "name": "Change Detection", "level": "Intermediate", "years": "2" }
+    ]
+  },
+  {
+    "category": "Programming & Data Analysis",
+    "icon": "fa-code",
+    "skills": [
+      { "name": "Python (GIS)", "level": "Intermediate", "years": "2" },
+      { "name": "R Statistics", "level": "Beginner", "years": "1" },
+      { "name": "JavaScript (GEE)", "level": "Beginner", "years": "1" },
+      { "name": "GeoPandas", "level": "Intermediate", "years": "1" },
+      { "name": "Excel / Spreadsheets", "level": "Advanced", "years": "4" }
+    ]
+  },
+  {
+    "category": "Urban Planning Tools",
+    "icon": "fa-city",
+    "skills": [
+      { "name": "AutoCAD", "level": "Intermediate", "years": "2" },
+      { "name": "SketchUp", "level": "Beginner", "years": "1" },
+      { "name": "Land Use Planning", "level": "Intermediate", "years": "3" },
+      { "name": "Urban Design", "level": "Beginner", "years": "2" }
+    ]
+  },
+  {
+    "category": "Research & Visualization",
+    "icon": "fa-chart-bar",
+    "skills": [
+      { "name": "Academic Research", "level": "Intermediate", "years": "3" },
+      { "name": "Data Visualization", "level": "Intermediate", "years": "2" },
+      { "name": "Scientific Writing", "level": "Intermediate", "years": "3" },
+      { "name": "SPSS", "level": "Beginner", "years": "1" },
+      { "name": "Tableau", "level": "Beginner", "years": "1" }
+    ]
+  },
+  {
+    "category": "Soft Skills",
+    "icon": "fa-handshake",
+    "skills": [
+      { "name": "Research & Analysis", "level": "Advanced", "years": "3" },
+      { "name": "Technical Writing", "level": "Intermediate", "years": "3" },
+      { "name": "Team Leadership", "level": "Intermediate", "years": "2" },
+      { "name": "Presentation", "level": "Intermediate", "years": "3" },
+      { "name": "Project Management", "level": "Beginner", "years": "2" }
+    ]
+  }
+]

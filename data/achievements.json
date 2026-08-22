@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Dean's List Academic Excellence",
+    "organization": "KUET",
+    "date": "2023-12",
+    "category": "Academic",
+    "description": "Recognized for outstanding academic performance and placed on the Dean's List for exceptional CGPA during the academic year.",
+    "icon": "🏆",
+    "featured": true,
+    "image": "",
+    "url": ""
+  },
+  {
+    "id": 2,
+    "title": "GIS Mapping Competition — 1st Place",
+    "organization": "KUET Department of URP",
+    "date": "2024-03",
+    "category": "Competition",
+    "description": "Won first place in the departmental GIS mapping competition for flood susceptibility mapping using multi-criteria spatial analysis. Competed against 15 teams.",
+    "icon": "🥇",
+    "featured": true,
+    "image": "",
+    "url": ""
+  },
+  {
+    "id": 3,
+    "title": "Research Grant — Undergraduate Research Award",
+    "organization": "KUET Research Cell",
+    "date": "2024-06",
+    "category": "Award",
+    "description": "Received undergraduate research funding for the flood risk assessment project studying coastal vulnerability in southwest Bangladesh.",
+    "icon": "🎖️",
+    "featured": true,
+    "image": "",
+    "url": ""
+  },
+  {
+    "id": 4,
+    "title": "National Urban Planning Conference Participant",
+    "organization": "Bangladesh Institute of Planners",
+    "date": "2023-11",
+    "category": "Academic",
+    "description": "Participated in the National Urban Planning Conference, presenting research on GIS applications in flood risk management and urban resilience.",
+    "icon": "📜",
+    "featured": false,
+    "image": "",
+    "url": ""
+  },
+  {
+    "id": 5,
+    "title": "NASA ARSET Training Completion",
+    "organization": "NASA Applied Remote Sensing Training",
+    "date": "2024-04",
+    "category": "Academic",
+    "description": "Successfully completed NASA's Applied Remote Sensing Training on flood inundation mapping using SAR data, an internationally recognized professional development program.",
+    "icon": "🛰️",
+    "featured": true,
+    "image": "",
+    "url": ""
+  },
+  {
+    "id": 6,
+    "title": "Best Thesis Presentation Award",
+    "organization": "KUET Department of URP",
+    "date": "2024-09",
+    "category": "Award",
+    "description": "Recognized for the best thesis presentation in the department for research work on spatial analysis and flood risk assessment.",
+    "icon": "🌟",
+    "featured": false,
+    "image": "",
+    "url": ""
+  }
+]

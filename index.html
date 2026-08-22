@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarwar Jony | Urban & Regional Planning | GIS & Remote Sensing</title>
+  <meta name="description" content="Sarwar Jony - Urban & Regional Planning Student at KUET, GIS & Remote Sensing Enthusiast, Aspiring Researcher specializing in Spatial Data & Urban Analytics." />
+  <meta name="keywords" content="Sarwar Jony, Urban Planning, GIS, Remote Sensing, KUET, Spatial Analysis, Flood Risk, Climate Resilience" />
+  <meta name="author" content="Sarwar Jony" />
+  <link rel="canonical" href="https://sarwarjony.github.io/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sarwar Jony | Urban & Regional Planning | GIS & Remote Sensing" />
+  <meta property="og:description" content="Urban & Regional Planning Student at KUET, GIS & Remote Sensing Enthusiast, Aspiring Researcher." />
+  <meta property="og:url" content="https://sarwarjony.github.io/" />
+  <meta property="og:image" content="assets/images/og-image.jpg" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sarwar Jony | GIS & Urban Planning" />
+  <meta name="twitter:description" content="Urban & Regional Planning Student at KUET, GIS & Remote Sensing Enthusiast." />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #2563EB;
+      --primary-dark: #1d4ed8;
+      --primary-light: #3b82f6;
+      --secondary: #10B981;
+      --secondary-dark: #059669;
+      --dark: #111827;
+      --gray-900: #1f2937;
+      --gray-800: #374151;
+      --gray-700: #4b5563;
+      --gray-600: #6b7280;
+      --gray-500: #9ca3af;
+      --gray-400: #d1d5db;
+      --gray-300: #e5e7eb;
+      --gray-200: #f3f4f6;
+      --gray-100: #f9fafb;
+      --light-bg: #F8FAFC;
+      --white: #ffffff;
+      --font-main: 'Inter', sans-serif;
+      --font-heading: 'Manrope', sans-serif;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      --radius: 12px;
+      --radius-lg: 20px;
+      --transition: all 0.3s ease;
+    }
+    [data-theme="dark"] {
+      --dark: #f9fafb;
+      --gray-900: #f3f4f6;
+      --gray-800: #e5e7eb;
+      --gray-700: #d1d5db;
+      --gray-600: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-400: #4b5563;
+      --gray-300: #374151;
+      --gray-200: #1f2937;
+      --gray-100: #111827;
+      --light-bg: #0f172a;
+      --white: #1e293b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+      --shadow: 0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -1px rgba(0,0,0,0.2);
+      --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.3), 0 4px 6px -2px rgba(0,0,0,0.2);
+      --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.3), 0 10px 10px -5px rgba(0,0,0,0.2);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-main);
+      background: var(--light-bg);
+      color: var(--dark);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--gray-200); }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(248, 250, 252, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-300);
+      transition: var(--transition);
+    }
+    [data-theme="dark"] #navbar {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom-color: var(--gray-300);
+    }
+    #navbar.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+    .nav-container {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-brand-logo {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 15px;
+      font-family: var(--font-heading);
+    }
+    .nav-brand-text { font-family: var(--font-heading); font-weight: 700; font-size: 17px; color: var(--dark); }
+    .nav-brand-sub { font-size: 11px; color: var(--gray-600); font-weight: 400; display: block; margin-top: -2px; }
+    .nav-links {
+      display: flex; align-items: center; gap: 4px; list-style: none;
+    }
+    .nav-links a {
+      display: block; padding: 7px 12px; border-radius: 8px;
+      text-decoration: none; color: var(--gray-700); font-size: 14px; font-weight: 500;
+      transition: var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); background: rgba(37,99,235,0.08); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn-cv {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px;
+      background: var(--primary); color: white;
+      text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn-cv:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: var(--gray-200); color: var(--gray-700);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; transition: var(--transition);
+    }
+    .theme-toggle:hover { background: var(--gray-300); color: var(--primary); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 6px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark); border-radius: 2px; transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--gray-300);
+      padding: 16px; z-index: 999;
+      box-shadow: var(--shadow-md);
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a {
+      display: block; padding: 12px 16px; border-radius: 8px;
+      text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px;
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover, .mobile-menu a.active { background: rgba(37,99,235,0.08); color: var(--primary); }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 500px) {
+      .btn-cv span { display: none; }
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0f2744 100%);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center;
+    }
+    .hero-canvas {
+      position: absolute; inset: 0; opacity: 0.15; pointer-events: none;
+    }
+    .hero-container {
+      max-width: 1280px; margin: 0 auto; padding: 120px 24px 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+      position: relative; z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 50px;
+      background: rgba(37,99,235,0.2); border: 1px solid rgba(59,130,246,0.3);
+      color: #93c5fd; font-size: 13px; font-weight: 500; margin-bottom: 20px;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
+    .hero-name {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 800; line-height: 1.1;
+      color: white; margin-bottom: 16px;
+    }
+    .hero-name .accent { color: #60a5fa; }
+    .hero-title {
+      font-size: clamp(15px, 2vw, 18px);
+      color: #94a3b8; font-weight: 400; margin-bottom: 24px; line-height: 1.7;
+    }
+    .hero-title strong { color: #60a5fa; font-weight: 600; }
+    .hero-desc {
+      font-size: 15px; color: #94a3b8; line-height: 1.8; margin-bottom: 36px; max-width: 500px;
+    }
+    .hero-buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      background: var(--primary); color: white;
+      text-decoration: none; font-weight: 600; font-size: 14px;
+      transition: var(--transition); border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      background: transparent; color: white;
+      text-decoration: none; font-weight: 600; font-size: 14px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      transition: var(--transition);
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      background: var(--secondary); color: white;
+      text-decoration: none; font-weight: 600; font-size: 14px;
+      transition: var(--transition); border: none; cursor: pointer;
+    }
+    .btn-secondary:hover { background: var(--secondary-dark); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: left; }
+    .hero-stat-num { font-size: 28px; font-weight: 800; color: white; font-family: var(--font-heading); }
+    .hero-stat-label { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .hero-image-wrap {
+      position: relative; width: 320px; height: 380px;
+    }
+    .hero-image-bg {
+      position: absolute; inset: -12px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(37,99,235,0.3), rgba(16,185,129,0.2));
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+    .hero-image {
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: var(--radius-lg); position: relative; z-index: 1;
+    }
+    .hero-image-placeholder {
+      width: 100%; height: 100%; border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(37,99,235,0.2) 0%, rgba(16,185,129,0.1) 100%);
+      border: 2px dashed rgba(59,130,246,0.3);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #60a5fa; position: relative; z-index: 1; gap: 12px;
+    }
+    .hero-image-placeholder i { font-size: 48px; opacity: 0.5; }
+    .hero-image-placeholder p { font-size: 13px; opacity: 0.7; text-align: center; padding: 0 16px; }
+    .hero-float-card {
+      position: absolute; background: rgba(30,41,59,0.9);
+      border: 1px solid rgba(59,130,246,0.2); border-radius: 12px;
+      padding: 12px 16px; backdrop-filter: blur(8px);
+      display: flex; align-items: center; gap: 10px; z-index: 2;
+    }
+    .hero-float-card.card-1 { bottom: -20px; left: -40px; }
+    .hero-float-card.card-2 { top: 20px; right: -40px; }
+    .hero-float-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(37,99,235,0.2); display: flex; align-items: center; justify-content: center; color: #60a5fa; font-size: 16px; }
+    .hero-float-text { font-size: 12px; }
+    .hero-float-text .label { color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .hero-float-text .value { color: white; font-weight: 600; font-size: 13px; }
+    @media (max-width: 900px) {
+      .hero-container { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+      .hero-visual { display: none; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-badge { display: inline-flex; }
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 96px 0; }
+    .section-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .section-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 14px; border-radius: 50px;
+      background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.15);
+      color: var(--primary); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--font-heading); font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 800; color: var(--dark); line-height: 1.15; margin-bottom: 12px;
+    }
+    .section-subtitle {
+      font-size: 16px; color: var(--gray-600); line-height: 1.7; max-width: 560px;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-subtitle { margin: 0 auto; }
+    .alt-bg { background: var(--gray-200); }
+    [data-theme="dark"] .alt-bg { background: #1e293b; }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid; grid-template-columns: 380px 1fr; gap: 64px; align-items: start;
+    }
+    .about-image-wrap {
+      position: relative;
+    }
+    .about-image {
+      width: 100%; border-radius: var(--radius-lg);
+      object-fit: cover; box-shadow: var(--shadow-lg);
+    }
+    .about-image-placeholder {
+      width: 100%; aspect-ratio: 3/4; border-radius: var(--radius-lg);
+      background: var(--gray-200); border: 2px dashed var(--gray-400);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--gray-500); gap: 12px;
+    }
+    .about-image-placeholder i { font-size: 48px; }
+    .about-image-placeholder p { font-size: 13px; }
+    .about-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--primary); color: white;
+      padding: 14px 18px; border-radius: 14px;
+      text-align: center; box-shadow: var(--shadow-md);
+    }
+    .about-badge .num { font-size: 24px; font-weight: 800; font-family: var(--font-heading); display: block; }
+    .about-badge .label { font-size: 11px; opacity: 0.9; }
+    .about-content {}
+    .about-bio { font-size: 15px; color: var(--gray-700); line-height: 1.8; margin-bottom: 24px; }
+    .about-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .about-info-item { display: flex; align-items: center; gap: 10px; }
+    .about-info-item i { color: var(--primary); font-size: 14px; width: 18px; }
+    .about-info-item span { font-size: 14px; color: var(--gray-700); }
+    .about-social { display: flex; flex-wrap: wrap; gap: 8px; }
+    .about-social a {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 8px;
+      border: 1.5px solid var(--gray-300); color: var(--gray-700);
+      text-decoration: none; font-size: 13px; font-weight: 500;
+      transition: var(--transition);
+    }
+    .about-social a:hover { border-color: var(--primary); color: var(--primary); background: rgba(37,99,235,0.05); }
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image-wrap { max-width: 300px; margin: 0 auto; }
+    }
+
+    /* ===== RESEARCH INTERESTS ===== */
+    .interests-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
+    }
+    .interest-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 24px; border: 1px solid var(--gray-300);
+      transition: var(--transition); cursor: default;
+    }
+    .interest-card:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .interest-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(37,99,235,0.08); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 14px;
+    }
+    .interest-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .interest-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* ===== PROJECTS ===== */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 50px;
+      border: 1.5px solid var(--gray-300); background: var(--white);
+      color: var(--gray-700); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: var(--transition);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--primary); background: var(--primary); color: white;
+    }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
+    .project-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-300); overflow: hidden;
+      transition: var(--transition); display: flex; flex-direction: column;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+    .project-image {
+      width: 100%; height: 200px; object-fit: cover; display: block;
+    }
+    .project-image-placeholder {
+      width: 100%; height: 200px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(16,185,129,0.05));
+      display: flex; align-items: center; justify-content: center; color: var(--gray-500); font-size: 36px;
+    }
+    .project-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .project-category {
+      display: inline-block; padding: 4px 10px; border-radius: 50px;
+      background: rgba(37,99,235,0.08); color: var(--primary);
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 10px;
+    }
+    .project-title { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
+    .project-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; margin-bottom: 16px; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .project-tag {
+      padding: 3px 9px; border-radius: 50px;
+      background: var(--gray-200); color: var(--gray-700);
+      font-size: 11px; font-weight: 500;
+    }
+    .project-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .project-date { font-size: 12px; color: var(--gray-500); }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--primary); font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: var(--transition);
+    }
+    .project-link:hover { gap: 8px; }
+    .featured-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px; border-radius: 50px;
+      background: rgba(245,158,11,0.1); color: #d97706;
+      font-size: 10px; font-weight: 600; margin-bottom: 8px;
+    }
+    .empty-state {
+      grid-column: 1/-1; text-align: center; padding: 64px 24px;
+      color: var(--gray-500);
+    }
+    .empty-state i { font-size: 48px; margin-bottom: 16px; display: block; opacity: 0.4; }
+    .empty-state p { font-size: 15px; }
+
+    /* ===== RESEARCH ===== */
+    .research-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px; }
+    .research-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-300); padding: 28px;
+      transition: var(--transition); display: flex; flex-direction: column; gap: 14px;
+    }
+    .research-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--secondary); }
+    .research-area {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 50px;
+      background: rgba(16,185,129,0.08); color: var(--secondary-dark);
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    [data-theme="dark"] .research-area { color: var(--secondary); }
+    .research-title { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--dark); line-height: 1.35; }
+    .research-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
+    .research-meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .research-meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-500); }
+    .research-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;
+    }
+    .status-ongoing { background: rgba(59,130,246,0.1); color: #2563eb; }
+    .status-completed { background: rgba(16,185,129,0.1); color: #059669; }
+    .status-idea { background: rgba(139,92,246,0.1); color: #7c3aed; }
+    .status-published { background: rgba(34,197,94,0.1); color: #15803d; }
+    .status-review { background: rgba(245,158,11,0.1); color: #d97706; }
+    .research-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+    .research-tool {
+      padding: 3px 9px; border-radius: 50px;
+      background: var(--gray-200); color: var(--gray-700);
+      font-size: 11px; font-weight: 500;
+    }
+    .research-links { display: flex; gap: 10px; margin-top: auto; }
+    .research-link-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      text-decoration: none; transition: var(--transition); border: 1.5px solid;
+    }
+    .research-link-btn.primary { border-color: var(--primary); color: var(--primary); }
+    .research-link-btn.primary:hover { background: var(--primary); color: white; }
+    .research-link-btn.secondary { border-color: var(--gray-300); color: var(--gray-700); }
+    .research-link-btn.secondary:hover { border-color: var(--gray-600); }
+
+    /* ===== EXPERIENCE (TIMELINE) ===== */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 4px; width: 16px; height: 16px;
+      border-radius: 50%; background: var(--primary); border: 3px solid var(--white);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+    .timeline-card {
+      background: var(--white); border-radius: var(--radius); padding: 24px;
+      border: 1px solid var(--gray-300); transition: var(--transition);
+    }
+    .timeline-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
+    .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .timeline-title { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--dark); }
+    .timeline-org { font-size: 14px; color: var(--primary); font-weight: 600; margin-top: 2px; }
+    .timeline-date { font-size: 12px; color: var(--gray-500); white-space: nowrap; }
+    .timeline-type {
+      display: inline-block; padding: 3px 9px; border-radius: 50px;
+      background: rgba(37,99,235,0.08); color: var(--primary);
+      font-size: 11px; font-weight: 600; margin-bottom: 8px;
+    }
+    .timeline-desc { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+    .timeline-skills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .timeline-skill {
+      padding: 3px 9px; border-radius: 50px;
+      background: var(--gray-200); color: var(--gray-700); font-size: 11px; font-weight: 500;
+    }
+
+    /* ===== EDUCATION ===== */
+    .education-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 24px; }
+    .edu-card {
+      background: var(--white); border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-300); padding: 28px;
+      display: flex; gap: 20px; transition: var(--transition);
+    }
+    .edu-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); transform: translateY(-4px); }
+    .edu-logo {
+      width: 60px; height: 60px; border-radius: 12px;
+      background: var(--gray-200); display: flex; align-items: center; justify-content: center;
+      color: var(--primary); font-size: 24px; flex-shrink: 0;
+    }
+    .edu-content {}
+    .edu-degree { font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .edu-institution { font-size: 14px; color: var(--primary); font-weight: 600; margin-bottom: 4px; }
+    .edu-dept { font-size: 13px; color: var(--gray-600); margin-bottom: 8px; }
+    .edu-meta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .edu-meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--gray-500); }
+
+    /* ===== SKILLS ===== */
+    .skills-container { display: flex; flex-direction: column; gap: 40px; }
+    .skill-group-title { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .skill-group-title i { color: var(--primary); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 16px; border-radius: 10px;
+      background: var(--white); border: 1.5px solid var(--gray-300);
+      transition: var(--transition); cursor: default;
+    }
+    .skill-tag:hover { border-color: var(--primary); background: rgba(37,99,235,0.04); }
+    .skill-tag i { color: var(--primary); font-size: 14px; }
+    .skill-tag span { font-size: 13px; font-weight: 600; color: var(--dark); }
+    .skill-tag .level { font-size: 11px; color: var(--gray-500); margin-left: 4px; }
+
+    /* ===== CERTIFICATES ===== */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .cert-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--gray-300); transition: var(--transition);
+    }
+    .cert-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+    .cert-image {
+      width: 100%; height: 160px; object-fit: cover;
+    }
+    .cert-image-placeholder {
+      width: 100%; height: 160px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(16,185,129,0.05));
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--gray-400); gap: 8px;
+    }
+    .cert-image-placeholder i { font-size: 32px; }
+    .cert-body { padding: 18px; }
+    .cert-category {
+      display: inline-block; padding: 3px 9px; border-radius: 50px;
+      background: rgba(37,99,235,0.08); color: var(--primary);
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 8px;
+    }
+    .cert-name { font-size: 14px; font-weight: 700; color: var(--dark); line-height: 1.35; margin-bottom: 4px; }
+    .cert-issuer { font-size: 12px; color: var(--gray-600); margin-bottom: 6px; }
+    .cert-date { font-size: 11px; color: var(--gray-500); margin-bottom: 12px; }
+    .cert-actions { display: flex; gap: 8px; }
+    .cert-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: 7px; font-size: 12px; font-weight: 600;
+      text-decoration: none; transition: var(--transition); border: 1.5px solid;
+    }
+    .cert-btn.primary { border-color: var(--primary); color: var(--primary); }
+    .cert-btn.primary:hover { background: var(--primary); color: white; }
+    .cert-btn.outline { border-color: var(--gray-300); color: var(--gray-700); }
+    .cert-btn.outline:hover { border-color: var(--gray-500); }
+
+    /* ===== PUBLICATIONS ===== */
+    .pub-list { display: flex; flex-direction: column; gap: 20px; }
+    .pub-card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--gray-300); padding: 24px;
+      transition: var(--transition); display: flex; gap: 20px;
+    }
+    .pub-card:hover { border-color: var(--primary); box-shadow: var(--shadow-md); }
+    .pub-index {
+      font-size: 24px; font-weight: 800; color: var(--gray-300);
+      font-family: var(--font-heading); flex-shrink: 0; line-height: 1;
+    }
+    .pub-content {}
+    .pub-type {
+      display: inline-block; padding: 3px 9px; border-radius: 50px;
+      background: rgba(16,185,129,0.08); color: var(--secondary-dark);
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 8px;
+    }
+    [data-theme="dark"] .pub-type { color: var(--secondary); }
+    .pub-title { font-size: 16px; font-weight: 700; color: var(--dark); line-height: 1.4; margin-bottom: 6px; }
+    .pub-authors { font-size: 13px; color: var(--gray-600); margin-bottom: 4px; }
+    .pub-journal { font-size: 13px; color: var(--primary); font-weight: 500; margin-bottom: 8px; }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 7px; font-size: 12px; font-weight: 600;
+      text-decoration: none; transition: var(--transition);
+      border: 1.5px solid var(--gray-300); color: var(--gray-700);
+    }
+    .pub-link:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* ===== ACHIEVEMENTS ===== */
+    .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .achieve-card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--gray-300); padding: 24px;
+      transition: var(--transition); text-align: center;
+    }
+    .achieve-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+    .achieve-icon { font-size: 36px; margin-bottom: 12px; }
+    .achieve-title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 6px; line-height: 1.3; }
+    .achieve-org { font-size: 13px; color: var(--primary); font-weight: 500; margin-bottom: 4px; }
+    .achieve-date { font-size: 12px; color: var(--gray-500); margin-bottom: 10px; }
+    .achieve-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+    .achieve-category {
+      display: inline-block; padding: 3px 9px; border-radius: 50px; margin-bottom: 8px;
+      background: rgba(245,158,11,0.1); color: #d97706;
+      font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .contact-info {}
+    .contact-info p { font-size: 15px; color: var(--gray-600); line-height: 1.8; margin-bottom: 28px; }
+    .contact-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .contact-card {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; border-radius: var(--radius);
+      background: var(--white); border: 1px solid var(--gray-300);
+      text-decoration: none; color: var(--dark);
+      transition: var(--transition);
+    }
+    .contact-card:hover { border-color: var(--primary); background: rgba(37,99,235,0.03); }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; background: rgba(37,99,235,0.08); color: var(--primary);
+    }
+    .contact-card-label { font-size: 11px; color: var(--gray-500); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-card-value { font-size: 14px; font-weight: 600; color: var(--dark); }
+    .contact-form { background: var(--white); border-radius: var(--radius-lg); padding: 36px; border: 1px solid var(--gray-300); }
+    .contact-form h3 { font-family: var(--font-heading); font-size: 20px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+    .contact-form p { font-size: 13px; color: var(--gray-500); margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+    .form-control {
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      border: 1.5px solid var(--gray-300); background: var(--light-bg);
+      color: var(--dark); font-size: 14px; font-family: var(--font-main);
+      transition: var(--transition); outline: none;
+    }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+    textarea.form-control { resize: vertical; min-height: 120px; }
+    .form-notice { font-size: 11px; color: var(--gray-500); margin-top: -8px; margin-bottom: 16px; }
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0f172a; color: #94a3b8; padding: 64px 0 24px;
+    }
+    .footer-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand-name { font-family: var(--font-heading); font-size: 20px; font-weight: 800; color: white; margin-bottom: 8px; }
+    .footer-brand-sub { font-size: 13px; color: #64748b; line-height: 1.7; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; flex-wrap: wrap; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); color: #94a3b8;
+      text-decoration: none; font-size: 14px; transition: var(--transition);
+    }
+    .footer-social a:hover { background: rgba(37,99,235,0.3); color: white; }
+    .footer-col-title { font-size: 13px; font-weight: 700; color: white; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { color: #64748b; text-decoration: none; font-size: 13px; transition: var(--transition); }
+    .footer-links a:hover { color: #60a5fa; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: #475569; }
+    .footer-made { font-size: 13px; color: #475569; }
+    .footer-made a { color: #60a5fa; text-decoration: none; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      z-index: 2000; display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--white); border-radius: var(--radius-lg);
+      max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto;
+      transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 28px 28px 0; gap: 16px;
+    }
+    .modal-close {
+      width: 36px; height: 36px; border-radius: 8px; border: none;
+      background: var(--gray-200); color: var(--gray-700); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: var(--transition); flex-shrink: 0;
+    }
+    .modal-close:hover { background: var(--gray-300); }
+    .modal-body { padding: 24px 28px 28px; }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .fade-up {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-in { opacity: 0; transition: opacity 0.6s ease; }
+    .fade-in.visible { opacity: 1; }
+
+    /* ===== BACK TO TOP ===== */
+    #back-to-top {
+      position: fixed; bottom: 24px; right: 24px;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--primary); color: white; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: var(--transition); z-index: 999;
+      opacity: 0; pointer-events: none; box-shadow: var(--shadow-md);
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: all; }
+    #back-to-top:hover { background: var(--primary-dark); transform: translateY(-3px); }
+
+    /* ===== PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      z-index: 9999; transition: width 0.2s ease;
+    }
+
+    /* ===== MISC ===== */
+    .text-primary { color: var(--primary); }
+    .text-secondary { color: var(--secondary); }
+    .divider { height: 1px; background: var(--gray-300); margin: 0; }
+    @media (max-width: 768px) {
+      section { padding: 64px 0; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .research-grid { grid-template-columns: 1fr; }
+      .education-grid { grid-template-columns: 1fr; }
+      .edu-card { flex-direction: column; }
+    }
+    @media (max-width: 500px) {
+      .achievements-grid { grid-template-columns: 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand" aria-label="Sarwar Jony Home">
+        <div class="nav-brand-logo">SJ</div>
+        <div>
+          <span class="nav-brand-text">Sarwar Jony</span>
+          <span class="nav-brand-sub">URP | GIS &amp; Remote Sensing</span>
+        </div>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#hero" class="nav-link" data-section="hero">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#research" class="nav-link" data-section="research">Research</a></li>
+        <li><a href="#projects" class="nav-link" data-section="projects">Projects</a></li>
+        <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+        <li><a href="#education" class="nav-link" data-section="education">Education</a></li>
+        <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+        <li><a href="#certificates" class="nav-link" data-section="certificates">Certificates</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="#" class="btn-cv" id="download-cv" aria-label="Download CV">
+          <i class="fas fa-download" aria-hidden="true"></i>
+          <span>Download CV</span>
+        </a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="theme-icon" aria-hidden="true"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="#hero" class="nav-link">Home</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#research" class="nav-link">Research</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#education" class="nav-link">Education</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#certificates" class="nav-link">Certificates</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#" id="mobile-cv" style="margin-top:8px;display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--primary);color:white;border-radius:8px;font-weight:600;text-decoration:none;">
+      <i class="fas fa-download"></i> Download CV
+    </a>
+  </div>
+
+  <!-- Hero -->
+  <section id="hero" aria-label="Hero section">
+    <canvas class="hero-canvas" id="hero-canvas"></canvas>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span>
+          Open to Research Collaborations &amp; Opportunities
+        </div>
+        <h1 class="hero-name" id="hero-name">
+          Hi, I'm <span class="accent">Sarwar Jony</span>
+        </h1>
+        <p class="hero-title" id="hero-title">
+          <strong>Urban &amp; Regional Planning Student</strong> |
+          GIS &amp; Remote Sensing Enthusiast |
+          Aspiring Researcher
+        </p>
+        <p class="hero-desc" id="hero-desc">
+          Khulna University of Engineering &amp; Technology (KUET) · Specializing in Spatial Data Analysis, Flood Risk Assessment &amp; Urban Analytics. Passionate about leveraging geospatial technology for sustainable urban development.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn-primary">
+            <i class="fas fa-layer-group" aria-hidden="true"></i> Explore My Work
+          </a>
+          <a href="#research" class="btn-outline">
+            <i class="fas fa-flask" aria-hidden="true"></i> View Research
+          </a>
+          <a href="#" class="btn-secondary" id="hero-cv-btn">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> Download CV
+          </a>
+          <a href="#contact" class="btn-outline">
+            <i class="fas fa-envelope" aria-hidden="true"></i> Contact Me
+          </a>
+        </div>
+        <div class="hero-stats" id="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-projects">12+</div>
+            <div class="hero-stat-label">Projects</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-certs">18+</div>
+            <div class="hero-stat-label">Certificates</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="stat-skills">25+</div>
+            <div class="hero-stat-label">Skills</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">KUET</div>
+            <div class="hero-stat-label">University</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-image-wrap">
+          <div class="hero-image-bg"></div>
+          <div class="hero-image-placeholder" id="hero-image-container">
+            <i class="fas fa-user-circle" aria-hidden="true"></i>
+            <p>Upload your profile photo in Admin → Profile</p>
+          </div>
+          <div class="hero-float-card card-1">
+            <div class="hero-float-icon"><i class="fas fa-map-marked-alt" aria-hidden="true"></i></div>
+            <div class="hero-float-text">
+              <div class="label">Expertise</div>
+              <div class="value">GIS &amp; Spatial Analysis</div>
+            </div>
+          </div>
+          <div class="hero-float-card card-2">
+            <div class="hero-float-icon"><i class="fas fa-satellite" aria-hidden="true"></i></div>
+            <div class="hero-float-text">
+              <div class="label">Technology</div>
+              <div class="value">Remote Sensing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="alt-bg" aria-label="About section">
+    <div class="section-container">
+      <div class="about-grid">
+        <div class="about-image-wrap fade-up">
+          <div class="about-image-placeholder" id="about-image-container">
+            <i class="fas fa-user-circle" aria-hidden="true"></i>
+            <p>Profile Photo</p>
+          </div>
+          <div class="about-badge">
+            <span class="num">KUET</span>
+            <span class="label">Engineering University</span>
+          </div>
+        </div>
+        <div class="fade-up" style="animation-delay:0.1s">
+          <div class="section-badge"><i class="fas fa-user" aria-hidden="true"></i> About Me</div>
+          <h2 class="section-title" id="about-title">Urban Planner &amp; GIS Specialist</h2>
+          <p class="about-bio" id="about-bio">
+            I am a passionate Urban &amp; Regional Planning student at Khulna University of Engineering &amp; Technology (KUET), with a deep focus on Geographic Information Systems (GIS), Remote Sensing, and Spatial Data Analysis. My academic journey is driven by the desire to understand and solve complex urban challenges through the power of geospatial technology.
+          </p>
+          <p class="about-bio" id="about-bio2">
+            My research interests center on flood risk assessment, climate resilience, and disaster risk reduction — areas where spatial analysis can make a real-world difference. I am actively seeking research collaborations and international opportunities to expand my academic and professional horizon.
+          </p>
+          <div class="about-info-grid" id="about-info-grid">
+            <div class="about-info-item"><i class="fas fa-university" aria-hidden="true"></i><span>KUET, Khulna, Bangladesh</span></div>
+            <div class="about-info-item"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>B.Sc. Urban &amp; Regional Planning</span></div>
+            <div class="about-info-item"><i class="fas fa-map-pin" aria-hidden="true"></i><span>Khulna, Bangladesh</span></div>
+            <div class="about-info-item"><i class="fas fa-envelope" aria-hidden="true"></i><span id="about-email">sarwarjony@kuet.ac.bd</span></div>
+          </div>
+          <div class="about-social" id="about-social">
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Google Scholar</a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-id-card" aria-hidden="true"></i> ORCID</a>
+            <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate" aria-hidden="true"></i> ResearchGate</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Interests -->
+  <section id="interests" aria-label="Research interests section">
+    <div class="section-container">
+      <div class="section-header centered fade-up">
+        <div class="section-badge"><i class="fas fa-compass" aria-hidden="true"></i> Focus Areas</div>
+        <h2 class="section-title">Research Interests</h2>
+        <p class="section-subtitle">Key areas where I focus my academic and professional development</p>
+      </div>
+      <div class="interests-grid" id="interests-grid"></div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section id="research" class="alt-bg" aria-label="Research section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-flask" aria-hidden="true"></i> Academic Research</div>
+        <h2 class="section-title">Research Projects</h2>
+        <p class="section-subtitle">Ongoing and completed research in GIS, Remote Sensing, and Urban Planning</p>
+      </div>
+      <div class="research-grid" id="research-grid"></div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" aria-label="Projects section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-layer-group" aria-hidden="true"></i> Portfolio</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">A showcase of GIS, Remote Sensing, and Urban Planning work</p>
+      </div>
+      <div class="filter-bar" id="project-filters" aria-label="Project category filters"></div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="alt-bg" aria-label="Experience section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-briefcase" aria-hidden="true"></i> Work History</div>
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">Academic, research, and professional experience</p>
+      </div>
+      <div class="timeline" id="experience-timeline"></div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="education" aria-label="Education section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Academic</div>
+        <h2 class="section-title">Education</h2>
+        <p class="section-subtitle">My academic background and qualifications</p>
+      </div>
+      <div class="education-grid" id="education-grid"></div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="alt-bg" aria-label="Skills section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-tools" aria-hidden="true"></i> Capabilities</div>
+        <h2 class="section-title">Skills &amp; Tools</h2>
+        <p class="section-subtitle">Technical and professional competencies</p>
+      </div>
+      <div class="skills-container" id="skills-container"></div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications" aria-label="Publications section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-book-open" aria-hidden="true"></i> Academic Output</div>
+        <h2 class="section-title">Publications</h2>
+        <p class="section-subtitle">Research papers, conference proceedings, and academic writing</p>
+      </div>
+      <div class="pub-list" id="publications-list"></div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section id="certificates" class="alt-bg" aria-label="Certificates section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-certificate" aria-hidden="true"></i> Credentials</div>
+        <h2 class="section-title">Certificates</h2>
+        <p class="section-subtitle">Professional development and academic certifications</p>
+      </div>
+      <div class="filter-bar" id="cert-filters" aria-label="Certificate category filters"></div>
+      <div class="cert-grid" id="cert-grid"></div>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section id="achievements" aria-label="Achievements section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-trophy" aria-hidden="true"></i> Honors</div>
+        <h2 class="section-title">Achievements</h2>
+        <p class="section-subtitle">Awards, recognitions, and notable accomplishments</p>
+      </div>
+      <div class="achievements-grid" id="achievements-grid"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="alt-bg" aria-label="Contact section">
+    <div class="section-container">
+      <div class="section-header fade-up">
+        <div class="section-badge"><i class="fas fa-envelope" aria-hidden="true"></i> Get In Touch</div>
+        <h2 class="section-title">Contact Me</h2>
+        <p class="section-subtitle">Open to research collaborations, academic opportunities, and professional connections</p>
+      </div>
+      <div class="contact-grid">
+        <div class="fade-up">
+          <p id="contact-desc">Feel free to reach out for research collaborations, academic discussions, project inquiries, or any professional opportunities. I'm always open to connecting with fellow researchers and professionals in the field of Urban Planning, GIS, and Remote Sensing.</p>
+          <div class="contact-cards" id="contact-cards"></div>
+        </div>
+        <div class="fade-up" style="animation-delay:0.1s">
+          <div class="contact-form">
+            <h3>Send a Message</h3>
+            <p>This form uses your email client to send the message directly.</p>
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name">Your Name *</label>
+                  <input type="text" id="contact-name" class="form-control" placeholder="John Doe" required />
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Your Email *</label>
+                  <input type="email" id="contact-email" class="form-control" placeholder="john@example.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Subject *</label>
+                <input type="text" id="contact-subject" class="form-control" placeholder="Research Collaboration Inquiry" required />
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message *</label>
+                <textarea id="contact-message" class="form-control" rows="5" placeholder="Your message..." required></textarea>
+              </div>
+              <p class="form-notice">* This form opens your email client (mailto). For automated form handling, connect to Formspree or EmailJS in the admin settings.</p>
+              <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+                <i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name" id="footer-name">Sarwar Jony</div>
+          <p class="footer-brand-sub" id="footer-bio">Urban &amp; Regional Planning Student at KUET · GIS &amp; Remote Sensing Enthusiast · Aspiring Researcher</p>
+          <div class="footer-social" id="footer-social"></div>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#research">Research</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Resources</div>
+          <ul class="footer-links">
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certificates">Certificates</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Academic</div>
+          <ul class="footer-links" id="footer-academic-links">
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">ResearchGate</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">ORCID</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy" id="footer-copy">© 2025 Sarwar Jony. All rights reserved.</p>
+        <p class="footer-made">Urban Planner · GIS Enthusiast · Aspiring Researcher</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Project Modal -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div id="modal-category" class="project-category"></div>
+          <h2 id="modal-title" style="font-family:var(--font-heading);font-size:22px;font-weight:800;color:var(--dark);"></h2>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Close modal"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+  // ============================================================
+  // PORTFOLIO DATA - Loads from localStorage (set by admin)
+  // or falls back to default sample data
+  // ============================================================
+
+  const DEFAULT_DATA = {
+    profile: {
+      name: "Sarwar Jony",
+      title: "Urban & Regional Planning Student | GIS & Remote Sensing Enthusiast",
+      tagline: "Aspiring Researcher | Spatial Data & Urban Analytics",
+      bio: "I am a passionate Urban & Regional Planning student at Khulna University of Engineering & Technology (KUET), with a deep focus on Geographic Information Systems (GIS), Remote Sensing, and Spatial Data Analysis.",
+      bio2: "My research interests center on flood risk assessment, climate resilience, and disaster risk reduction — areas where spatial analysis can make a real-world difference. I am actively seeking research collaborations and international opportunities.",
+      photo: "",
+      location: "Khulna, Bangladesh",
+      email: "sarwarjony@kuet.ac.bd",
+      phone: "",
+      university: "KUET",
+      department: "Urban & Regional Planning",
+      linkedin: "#",
+      github: "#",
+      scholar: "#",
+      orcid: "#",
+      researchgate: "#",
+      youtube: "#",
+      facebook: "#",
+      cvUrl: "#"
+    },
+    settings: {
+      siteTitle: "Sarwar Jony | Urban & Regional Planning | GIS",
+      primaryColor: "#2563EB",
+      secondaryColor: "#10B981",
+      footerText: "© 2025 Sarwar Jony. All rights reserved.",
+      darkMode: "system",
+      analyticsId: ""
+    },
+    interests: [
+      { id:1, icon:"fa-map", title:"GIS & Spatial Analysis", desc:"Geographic Information Systems for urban and environmental analysis" },
+      { id:2, icon:"fa-satellite", title:"Remote Sensing", desc:"Satellite imagery analysis for land use and environmental monitoring" },
+      { id:3, icon:"fa-water", title:"Flood Risk Assessment", desc:"Spatial modeling of flood hazards and vulnerability mapping" },
+      { id:4, icon:"fa-city", title:"Urban Resilience", desc:"Building climate-resilient cities through data-driven planning" },
+      { id:5, icon:"fa-cloud-sun-rain", title:"Climate Change", desc:"Impact assessment and adaptation strategies for urban areas" },
+      { id:6, icon:"fa-chart-area", title:"Urban Analytics", desc:"Data-driven insights for sustainable urban development" },
+      { id:7, icon:"fa-leaf", title:"Environmental Planning", desc:"Integrating ecological considerations into spatial planning" },
+      { id:8, icon:"fa-shield-halved", title:"Disaster Risk Reduction", desc:"DRR strategies using geospatial technologies" },
+      { id:9, icon:"fa-earth-asia", title:"Sustainable Development", desc:"SDG-aligned urban and regional development planning" }
+    ],
+    projects: [
+      {
+        id:1, title:"Flood Susceptibility Mapping using GIS & Remote Sensing",
+        slug:"flood-susceptibility-mapping",
+        category:"GIS", description:"Multi-criteria spatial analysis for flood risk assessment in low-lying coastal zones using ArcGIS Pro and Google Earth Engine.",
+        tools:["ArcGIS Pro","Google Earth Engine","QGIS","Python"],
+        date:"2024", status:"Completed", featured:true,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["Flood Risk","Spatial Analysis","Remote Sensing"]
+      },
+      {
+        id:2, title:"Land Use Land Cover Change Detection",
+        slug:"lulc-change-detection",
+        category:"Remote Sensing", description:"Temporal analysis of LULC changes over 30 years using Landsat imagery to assess urban expansion and its environmental impacts.",
+        tools:["Google Earth Engine","QGIS","Python","Landsat"],
+        date:"2024", status:"Completed", featured:true,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["LULC","Change Detection","Urban Expansion"]
+      },
+      {
+        id:3, title:"Urban Heat Island Effect Analysis",
+        slug:"urban-heat-island",
+        category:"Urban Planning", description:"Thermal band analysis to identify urban heat islands and propose green infrastructure interventions for climate resilience.",
+        tools:["Google Earth Engine","ArcGIS Pro","ENVI","Python"],
+        date:"2023", status:"Completed", featured:true,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["Urban Heat Island","Climate","Green Infrastructure"]
+      },
+      {
+        id:4, title:"Spatial Analysis of Urban Waterlogging",
+        slug:"urban-waterlogging",
+        category:"GIS", description:"GIS-based assessment of urban waterlogging patterns and drainage infrastructure analysis in Khulna city.",
+        tools:["ArcGIS Pro","QGIS","HEC-HMS","Python"],
+        date:"2024", status:"Ongoing", featured:false,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["Waterlogging","Urban Drainage","Khulna"]
+      },
+      {
+        id:5, title:"Coastal Vulnerability Index Mapping",
+        slug:"coastal-vulnerability",
+        category:"Research", description:"Assessment of coastal vulnerability using multi-parameter spatial index integrating physical, social, and economic indicators.",
+        tools:["ArcGIS Pro","Python","QGIS","Statistical Analysis"],
+        date:"2023", status:"Completed", featured:false,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["Coastal Zone","Vulnerability","Climate Adaptation"]
+      },
+      {
+        id:6, title:"Vegetation Health Monitoring with NDVI",
+        slug:"ndvi-vegetation-monitoring",
+        category:"Remote Sensing", description:"Time-series NDVI analysis using Sentinel-2 and Landsat-8 data to monitor vegetation health changes across urban and peri-urban areas.",
+        tools:["Google Earth Engine","Python","QGIS","Sentinel-2"],
+        date:"2023", status:"Completed", featured:false,
+        thumbnail:"", githubUrl:"#", reportUrl:"#", liveUrl:"",
+        tags:["NDVI","Vegetation","Sentinel-2"]
+      }
+    ],
+    research: [
+      {
+        id:1, title:"Flood Risk Assessment Using Multi-Criteria Decision Analysis and GIS",
+        area:"Flood Risk & Spatial Analysis",
+        description:"This research employs GIS-based Multi-Criteria Decision Analysis (MCDA) to assess flood susceptibility in the southwest coastal region of Bangladesh, integrating remote sensing data with socio-economic vulnerability indicators.",
+        question:"How can GIS-based MCDA be used to generate accurate flood susceptibility maps for climate-vulnerable coastal regions?",
+        methodology:"MCDA, GIS Spatial Analysis, Remote Sensing, AHP",
+        tools:["ArcGIS Pro","Google Earth Engine","Python","QGIS"],
+        status:"Ongoing", startDate:"2024-01",
+        supervisor:"Add Supervisor Name", keywords:["Flood Risk","GIS","MCDA","Bangladesh","Coastal Zone"],
+        paperUrl:"#", githubUrl:"#"
+      },
+      {
+        id:2, title:"Urban Expansion and Its Impact on Green Spaces: A Remote Sensing Approach",
+        area:"Urban Growth & Environment",
+        description:"Temporal analysis of urban growth patterns using Landsat time-series data to quantify the loss of green spaces and agricultural land due to rapid urbanization in secondary cities.",
+        question:"What is the rate and spatial pattern of green space loss due to urban expansion, and what planning interventions can mitigate these impacts?",
+        methodology:"Remote Sensing, LULC Change Detection, Spatial Statistics",
+        tools:["Google Earth Engine","QGIS","Python","Landsat"],
+        status:"Ongoing", startDate:"2023-06",
+        supervisor:"Add Supervisor Name", keywords:["Urban Growth","Remote Sensing","Green Spaces","Land Use Change"],
+        paperUrl:"#", githubUrl:"#"
+      },
+      {
+        id:3, title:"Climate Resilience Assessment of Coastal Urban Settlements",
+        area:"Climate Resilience & Urban Planning",
+        description:"Research on building climate resilience in coastal urban settlements by analyzing exposure, sensitivity, and adaptive capacity using spatial data and community surveys.",
+        question:"What spatial and social factors determine climate resilience in coastal urban communities, and how can planning improve it?",
+        methodology:"Resilience Index, GIS Analysis, Community Survey, Spatial Statistics",
+        tools:["ArcGIS Pro","QGIS","Python","Statistical Software"],
+        status:"Idea", startDate:"2025-01",
+        supervisor:"Add Supervisor Name", keywords:["Climate Resilience","Coastal Cities","Adaptive Capacity"],
+        paperUrl:"", githubUrl:""
+      }
+    ],
+    experience: [
+      {
+        id:1, organization:"Khulna University of Engineering & Technology",
+        position:"Research Assistant (GIS Laboratory)",
+        type:"Academic", startDate:"2024-01", endDate:"",
+        current:true, location:"Khulna, Bangladesh",
+        description:"Assisting in GIS-based research projects focusing on urban spatial analysis, flood risk mapping, and remote sensing data processing.",
+        responsibilities:["Conducting GIS data analysis and spatial modeling","Processing satellite imagery using Google Earth Engine","Preparing research reports and visualizations","Supporting senior researchers in fieldwork and data collection"],
+        skills:["GIS","Remote Sensing","Google Earth Engine","ArcGIS Pro"],
+        websiteUrl:"https://www.kuet.ac.bd"
+      },
+      {
+        id:2, organization:"Bangladesh Institute of Planners (BIP)",
+        position:"Student Member",
+        type:"Volunteer", startDate:"2023-06", endDate:"",
+        current:true, location:"Dhaka, Bangladesh",
+        description:"Active member of the Bangladesh Institute of Planners, participating in professional development events, workshops, and planning conferences.",
+        responsibilities:["Attending professional development workshops","Participating in national planning conferences","Networking with professional planners","Contributing to planning advocacy activities"],
+        skills:["Urban Planning","Professional Development","Networking"],
+        websiteUrl:"https://www.bip.org.bd"
+      },
+      {
+        id:3, organization:"KUET Urban Planning Club",
+        position:"Executive Member",
+        type:"Leadership", startDate:"2023-01", endDate:"",
+        current:true, location:"Khulna, Bangladesh",
+        description:"Leading initiatives and organizing academic events for the Urban Planning Club at KUET, including workshops, seminars, and field visits.",
+        responsibilities:["Organizing departmental events and workshops","Managing club activities and member engagement","Coordinating with faculty for academic events"],
+        skills:["Leadership","Event Management","Communication"],
+        websiteUrl:""
+      }
+    ],
+    education: [
+      {
+        id:1, institution:"Khulna University of Engineering & Technology (KUET)",
+        degree:"Bachelor of Science (B.Sc.)",
+        program:"Urban & Regional Planning",
+        department:"Department of Urban & Regional Planning",
+        startYear:"2021", endYear:"2025",
+        current:true, cgpa:"Add your CGPA",
+        description:"Focused on urban spatial analysis, GIS, remote sensing, transportation planning, and environmental planning. Active in research activities and departmental organizations.",
+        coursework:["GIS & Spatial Analysis","Remote Sensing","Urban Planning Theory","Transportation Planning","Environmental Planning","Urban Economics","Research Methodology"],
+        websiteUrl:"https://www.kuet.ac.bd"
+      }
+    ],
+    skills: [
+      {
+        category:"GIS & Spatial Analysis", icon:"fa-map",
+        skills:[
+          { name:"ArcGIS Pro", level:"Advanced" },
+          { name:"QGIS", level:"Advanced" },
+          { name:"Google Earth Engine", level:"Intermediate" },
+          { name:"ArcGIS Online", level:"Intermediate" },
+          { name:"Spatial Statistics", level:"Intermediate" }
+        ]
+      },
+      {
+        category:"Remote Sensing", icon:"fa-satellite",
+        skills:[
+          { name:"ENVI", level:"Intermediate" },
+          { name:"Landsat Analysis", level:"Intermediate" },
+          { name:"Sentinel Data Processing", level:"Intermediate" },
+          { name:"NDVI Analysis", level:"Advanced" },
+          { name:"Image Classification", level:"Intermediate" }
+        ]
+      },
+      {
+        category:"Programming & Data Analysis", icon:"fa-code",
+        skills:[
+          { name:"Python (GIS)", level:"Intermediate" },
+          { name:"R Statistics", level:"Beginner" },
+          { name:"JavaScript (GEE)", level:"Beginner" },
+          { name:"GeoPandas", level:"Intermediate" },
+          { name:"Excel / Spreadsheets", level:"Advanced" }
+        ]
+      },
+      {
+        category:"Urban Planning Tools", icon:"fa-city",
+        skills:[
+          { name:"AutoCAD", level:"Intermediate" },
+          { name:"SketchUp", level:"Beginner" },
+          { name:"Urban Simulation", level:"Beginner" },
+          { name:"Land Use Planning", level:"Intermediate" }
+        ]
+      },
+      {
+        category:"Research & Visualization", icon:"fa-chart-bar",
+        skills:[
+          { name:"Academic Research", level:"Intermediate" },
+          { name:"Data Visualization", level:"Intermediate" },
+          { name:"Scientific Writing", level:"Intermediate" },
+          { name:"SPSS", level:"Beginner" },
+          { name:"Tableau", level:"Beginner" }
+        ]
+      }
+    ],
+    certificates: [
+      {
+        id:1, name:"GIS for Climate Action",
+        organization:"ESRI", date:"2024-06",
+        category:"GIS", description:"Completed training on using GIS for climate change assessment and adaptation planning.",
+        credentialUrl:"#", featured:true
+      },
+      {
+        id:2, name:"Google Earth Engine for Environmental Monitoring",
+        organization:"Google / Coursera", date:"2024-03",
+        category:"Remote Sensing", description:"Comprehensive training in Google Earth Engine JavaScript API for remote sensing and environmental analysis.",
+        credentialUrl:"#", featured:true
+      },
+      {
+        id:3, name:"Spatial Data Science: The New Frontier in Analytics",
+        organization:"ESRI", date:"2023-12",
+        category:"GIS", description:"Advanced spatial data science techniques for geographic analysis and decision-making.",
+        credentialUrl:"#", featured:false
+      },
+      {
+        id:4, name:"Python for Everybody",
+        organization:"University of Michigan / Coursera", date:"2023-08",
+        category:"Programming", description:"Comprehensive Python programming course covering data structures, algorithms, and applications.",
+        credentialUrl:"#", featured:false
+      },
+      {
+        id:5, name:"Disaster Risk Reduction using GIS",
+        organization:"UNDP / Online Training", date:"2024-01",
+        category:"GIS", description:"Specialized training on applying GIS for disaster risk reduction, vulnerability mapping, and emergency response planning.",
+        credentialUrl:"#", featured:true
+      },
+      {
+        id:6, name:"Remote Sensing for Land Use & Land Cover",
+        organization:"NASA ARSET", date:"2023-10",
+        category:"Remote Sensing", description:"NASA Applied Remote Sensing Training on LULC mapping using satellite data for environmental monitoring.",
+        credentialUrl:"#", featured:false
+      }
+    ],
+    publications: [
+      {
+        id:1, title:"Add Your First Publication Title Here",
+        authors:"Jony, S., et al.",
+        journal:"Add Journal/Conference Name",
+        date:"2025", type:"Journal Article",
+        abstract:"Add the abstract of your publication here. This is a placeholder for your first publication.",
+        doi:"", paperUrl:"#", pdfUrl:"", scholarUrl:"#",
+        keywords:["Urban Planning","GIS","Remote Sensing"],
+        status:"Published"
+      }
+    ],
+    achievements: [
+      {
+        id:1, title:"Dean's List Academic Excellence",
+        organization:"KUET", date:"2023-12",
+        category:"Academic", description:"Recognized for outstanding academic performance and placed on the Dean's List for the academic year.",
+        icon:"🏆", featured:true, url:""
+      },
+      {
+        id:2, title:"GIS Mapping Competition — 1st Place",
+        organization:"KUET Department of URP", date:"2024-03",
+        category:"Competition", description:"Won first place in the departmental GIS mapping competition for flood susceptibility mapping using multi-criteria analysis.",
+        icon:"🥇", featured:true, url:""
+      },
+      {
+        id:3, title:"Research Grant — Undergraduate Research Award",
+        organization:"KUET Research Cell", date:"2024-06",
+        category:"Award", description:"Received undergraduate research funding for the flood risk assessment project in the coastal regions of Bangladesh.",
+        icon:"🎖️", featured:true, url:""
+      },
+      {
+        id:4, title:"Active Participant — National Urban Planning Conference",
+        organization:"Bangladesh Institute of Planners", date:"2023-11",
+        category:"Academic", description:"Participated in the National Urban Planning Conference, presenting research on GIS applications in flood risk management.",
+        icon:"📜", featured:false, url:""
+      }
+    ],
+    social: [
+      { platform:"LinkedIn", url:"#", icon:"fab fa-linkedin", display:true },
+      { platform:"GitHub", url:"#", icon:"fab fa-github", display:true },
+      { platform:"Google Scholar", url:"#", icon:"fas fa-graduation-cap", display:true },
+      { platform:"ResearchGate", url:"#", icon:"fab fa-researchgate", display:true },
+      { platform:"ORCID", url:"#", icon:"fas fa-id-card", display:true },
+      { platform:"YouTube", url:"#", icon:"fab fa-youtube", display:false },
+      { platform:"Facebook", url:"#", icon:"fab fa-facebook", display:false }
+    ]
+  };
+
+  // ============================================================
+  // DATA MANAGER
+  // ============================================================
+  const DataManager = {
+    get(key) {
+      try {
+        const raw = localStorage.getItem('portfolio_' + key);
+        return raw ? JSON.parse(raw) : DEFAULT_DATA[key];
+      } catch(e) {
+        console.error('DataManager.get error:', e);
+        return DEFAULT_DATA[key];
+      }
+    },
+    getAll() {
+      const keys = Object.keys(DEFAULT_DATA);
+      const data = {};
+      keys.forEach(k => data[k] = this.get(k));
+      return data;
+    }
+  };
+
+  // ============================================================
+  // THEME MANAGER
+  // ============================================================
+  const ThemeManager = {
+    init() {
+      const saved = localStorage.getItem('portfolio_theme');
+      const settings = DataManager.get('settings');
+      const mode = saved || settings.darkMode || 'system';
+      if (mode === 'dark' || (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        this.setDark();
+      } else {
+        this.setLight();
+      }
+    },
+    setDark() {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      const icon = document.getElementById('theme-icon');
+      if (icon) { icon.className = 'fas fa-sun'; }
+      localStorage.setItem('portfolio_theme', 'dark');
+    },
+    setLight() {
+      document.documentElement.removeAttribute('data-theme');
+      const icon = document.getElementById('theme-icon');
+      if (icon) { icon.className = 'fas fa-moon'; }
+      localStorage.setItem('portfolio_theme', 'light');
+    },
+    toggle() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      isDark ? this.setLight() : this.setDark();
+    }
+  };
+
+  // ============================================================
+  // RENDER FUNCTIONS
+  // ============================================================
+
+  function renderProfile() {
+    const p = DataManager.get('profile');
+    // Hero
+    const hn = document.getElementById('hero-name');
+    if (hn) hn.innerHTML = `Hi, I'm <span class="accent">${escHtml(p.name)}</span>`;
+    const ht = document.getElementById('hero-title');
+    if (ht) ht.innerHTML = `<strong>${escHtml(p.title)}</strong>`;
+    const hd = document.getElementById('hero-desc');
+    if (hd) hd.textContent = p.tagline + ' · ' + (p.university||'KUET') + ', ' + (p.department||'Urban & Regional Planning');
+
+    // Hero image
+    const hic = document.getElementById('hero-image-container');
+    if (hic && p.photo) {
+      hic.outerHTML = `<img src="${p.photo}" alt="${escHtml(p.name)} profile photo" class="hero-image" id="hero-image-container" />`;
+    }
+
+    // About
+    const ab1 = document.getElementById('about-bio');
+    if (ab1) ab1.textContent = p.bio;
+    const ab2 = document.getElementById('about-bio2');
+    if (ab2) ab2.textContent = p.bio2;
+    const ae = document.getElementById('about-email');
+    if (ae) ae.textContent = p.email;
+
+    const aic = document.getElementById('about-image-container');
+    if (aic && p.photo) {
+      aic.outerHTML = `<img src="${p.photo}" alt="${escHtml(p.name)}" class="about-image" id="about-image-container" />`;
+    }
+
+    // About info
+    const aig = document.getElementById('about-info-grid');
+    if (aig) {
+      aig.innerHTML = `
+        <div class="about-info-item"><i class="fas fa-university"></i><span>${escHtml(p.university||'KUET')}, ${escHtml(p.location||'Khulna')}</span></div>
+        <div class="about-info-item"><i class="fas fa-graduation-cap"></i><span>B.Sc. ${escHtml(p.department||'Urban & Regional Planning')}</span></div>
+        <div class="about-info-item"><i class="fas fa-map-pin"></i><span>${escHtml(p.location||'Khulna, Bangladesh')}</span></div>
+        <div class="about-info-item"><i class="fas fa-envelope"></i><span>${escHtml(p.email)}</span></div>
+      `;
+    }
+
+    // About social
+    const social = DataManager.get('social');
+    const as = document.getElementById('about-social');
+    if (as) {
+      as.innerHTML = social.filter(s => s.display && s.url && s.url !== '#').map(s =>
+        `<a href="${s.url}" target="_blank" rel="noopener noreferrer"><i class="${s.icon}"></i> ${escHtml(s.platform)}</a>`
+      ).join('') || social.map(s =>
+        `<a href="${s.url}" target="_blank" rel="noopener noreferrer"><i class="${s.icon}"></i> ${escHtml(s.platform)}</a>`
+      ).join('');
+    }
+
+    // Footer
+    const fn = document.getElementById('footer-name');
+    if (fn) fn.textContent = p.name;
+    const fb = document.getElementById('footer-bio');
+    if (fb) fb.textContent = p.bio ? p.bio.substring(0, 120) + '...' : '';
+    const fc = document.getElementById('footer-copy');
+    const settings = DataManager.get('settings');
+    if (fc) fc.textContent = settings.footerText || `© ${new Date().getFullYear()} ${p.name}. All rights reserved.`;
+
+    // Footer social
+    const fs = document.getElementById('footer-social');
+    if (fs) {
+      fs.innerHTML = social.filter(s => s.display).map(s =>
+        `<a href="${s.url}" target="_blank" rel="noopener noreferrer" aria-label="${escHtml(s.platform)}"><i class="${s.icon}"></i></a>`
+      ).join('');
+    }
+
+    // CV URL
+    const cvButtons = document.querySelectorAll('#download-cv, #hero-cv-btn, #mobile-cv');
+    cvButtons.forEach(btn => { if (p.cvUrl && p.cvUrl !== '#') btn.href = p.cvUrl; });
+
+    // Contact cards
+    renderContactCards(p, social);
+
+    // Footer academic links
+    const fal = document.getElementById('footer-academic-links');
+    if (fal && social.length) {
+      const mapping = { 'Google Scholar':p.scholar, 'ResearchGate':p.researchgate, 'ORCID':p.orcid, 'GitHub':p.github };
+      fal.innerHTML = Object.entries(mapping).map(([name, url]) =>
+        `<li><a href="${url||'#'}" target="_blank" rel="noopener noreferrer">${escHtml(name)}</a></li>`
+      ).join('');
+    }
+
+    document.title = settings.siteTitle || `${p.name} | ${p.department||'Urban & Regional Planning'}`;
+  }
+
+  function renderInterests() {
+    const interests = DataManager.get('interests');
+    const grid = document.getElementById('interests-grid');
+    if (!grid) return;
+    if (!interests || !interests.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-compass"></i><p>No research interests added yet.</p></div>';
+      return;
+    }
+    grid.innerHTML = interests.map(item => `
+      <div class="interest-card fade-up">
+        <div class="interest-icon"><i class="fas ${item.icon||'fa-star'}"></i></div>
+        <div class="interest-title">${escHtml(item.title)}</div>
+        <div class="interest-desc">${escHtml(item.desc)}</div>
+      </div>
+    `).join('');
+  }
+
+  function renderResearch() {
+    const research = DataManager.get('research');
+    const grid = document.getElementById('research-grid');
+    if (!grid) return;
+    if (!research || !research.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-flask"></i><p>No research projects added yet. Go to Admin to add research.</p></div>';
+      return;
+    }
+    const statusMap = { 'Ongoing':'status-ongoing', 'Completed':'status-completed', 'Idea':'status-idea', 'Published':'status-published', 'Under Review':'status-review' };
+    grid.innerHTML = research.map(r => `
+      <div class="research-card fade-up">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <span class="research-area"><i class="fas fa-microscope"></i> ${escHtml(r.area)}</span>
+          <span class="research-status ${statusMap[r.status]||'status-ongoing'}">
+            <i class="fas fa-circle" style="font-size:6px;"></i> ${escHtml(r.status)}
+          </span>
+        </div>
+        <div class="research-title">${escHtml(r.title)}</div>
+        <div class="research-desc">${escHtml(r.description)}</div>
+        ${r.supervisor ? `<div class="research-meta"><div class="research-meta-item"><i class="fas fa-user-tie"></i> ${escHtml(r.supervisor)}</div></div>` : ''}
+        ${r.tools && r.tools.length ? `
+          <div class="research-tools">${r.tools.map(t => `<span class="research-tool">${escHtml(t)}</span>`).join('')}</div>
+        ` : ''}
+        ${r.keywords && r.keywords.length ? `
+          <div class="research-tools">${r.keywords.map(k => `<span class="research-tool" style="background:rgba(16,185,129,0.08);color:var(--secondary-dark);">${escHtml(k)}</span>`).join('')}</div>
+        ` : ''}
+        <div class="research-links">
+          ${r.paperUrl ? `<a href="${r.paperUrl}" class="research-link-btn primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Paper</a>` : ''}
+          ${r.githubUrl ? `<a href="${r.githubUrl}" class="research-link-btn secondary" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>` : ''}
+          <button class="research-link-btn secondary" onclick="showResearchDetail(${r.id})"><i class="fas fa-info-circle"></i> Details</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  let allProjects = [];
+  function renderProjects() {
+    allProjects = DataManager.get('projects');
+    const filters = document.getElementById('project-filters');
+    if (filters) {
+      const categories = ['All', ...new Set(allProjects.map(p => p.category))];
+      filters.innerHTML = categories.map((cat, i) =>
+        `<button class="filter-btn ${i===0?'active':''}" data-filter="${escHtml(cat)}">${escHtml(cat)}</button>`
+      ).join('');
+      filters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterProjects(btn.dataset.filter);
+        });
+      });
+    }
+    filterProjects('All');
+  }
+
+  function filterProjects(category) {
+    const grid = document.getElementById('projects-grid');
+    if (!grid) return;
+    const filtered = category === 'All' ? allProjects : allProjects.filter(p => p.category === category);
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i><p>No projects in this category yet.</p></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(p => `
+      <article class="project-card fade-up" role="article">
+        ${p.thumbnail
+          ? `<img src="${p.thumbnail}" alt="${escHtml(p.title)}" class="project-image" loading="lazy" />`
+          : `<div class="project-image-placeholder"><i class="fas fa-map" aria-hidden="true"></i></div>`
+        }
+        <div class="project-body">
+          ${p.featured ? '<div class="featured-badge">⭐ Featured</div>' : ''}
+          <div class="project-category">${escHtml(p.category)}</div>
+          <h3 class="project-title">${escHtml(p.title)}</h3>
+          <p class="project-desc">${escHtml(p.description)}</p>
+          ${p.tools && p.tools.length ? `<div class="project-tags">${p.tools.map(t => `<span class="project-tag">${escHtml(t)}</span>`).join('')}</div>` : ''}
+          <div class="project-footer">
+            <span class="project-date"><i class="far fa-calendar-alt"></i> ${escHtml(p.date)}</span>
+            <button class="project-link" onclick="showProjectDetail(${p.id})">
+              Details <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+    observeElements();
+  }
+
+  function showProjectDetail(id) {
+    const project = allProjects.find(p => p.id === id);
+    if (!project) return;
+    const modal = document.getElementById('project-modal');
+    document.getElementById('modal-category').textContent = project.category;
+    document.getElementById('modal-title').textContent = project.title;
+    document.getElementById('modal-body').innerHTML = `
+      ${project.thumbnail ? `<img src="${project.thumbnail}" alt="${escHtml(project.title)}" style="width:100%;border-radius:12px;margin-bottom:20px;max-height:300px;object-fit:cover;" />` : ''}
+      <p style="color:var(--gray-600);font-size:14px;line-height:1.8;margin-bottom:16px;">${escHtml(project.description)}</p>
+      ${project.tools && project.tools.length ? `
+        <div style="margin-bottom:16px;">
+          <strong style="font-size:13px;color:var(--dark);display:block;margin-bottom:8px;">Tools & Technologies</strong>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${project.tools.map(t => `<span class="project-tag">${escHtml(t)}</span>`).join('')}</div>
+        </div>
+      ` : ''}
+      ${project.tags && project.tags.length ? `
+        <div style="margin-bottom:16px;">
+          <strong style="font-size:13px;color:var(--dark);display:block;margin-bottom:8px;">Tags</strong>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${project.tags.map(t => `<span class="research-tool" style="background:rgba(37,99,235,0.08);color:var(--primary);">${escHtml(t)}</span>`).join('')}</div>
+        </div>
+      ` : ''}
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+        <span style="font-size:13px;color:var(--gray-500);">Date: ${escHtml(project.date)}</span>
+        <span class="research-status ${project.status==='Completed'?'status-completed':'status-ongoing'}">${escHtml(project.status)}</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        ${project.githubUrl ? `<a href="${project.githubUrl}" class="btn-primary" target="_blank" rel="noopener noreferrer" style="font-size:13px;padding:9px 18px;"><i class="fab fa-github"></i> GitHub</a>` : ''}
+        ${project.reportUrl ? `<a href="${project.reportUrl}" class="btn-secondary" target="_blank" rel="noopener noreferrer" style="font-size:13px;padding:9px 18px;"><i class="fas fa-file-pdf"></i> Report</a>` : ''}
+        ${project.liveUrl ? `<a href="${project.liveUrl}" class="btn-outline" target="_blank" rel="noopener noreferrer" style="font-size:13px;padding:9px 18px;color:var(--dark);border-color:var(--gray-400);"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+      </div>
+    `;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showResearchDetail(id) {
+    const research = DataManager.get('research');
+    const r = research.find(item => item.id === id);
+    if (!r) return;
+    const modal = document.getElementById('project-modal');
+    document.getElementById('modal-category').textContent = r.area;
+    document.getElementById('modal-title').textContent = r.title;
+    document.getElementById('modal-body').innerHTML = `
+      <div style="margin-bottom:16px;">
+        <strong style="font-size:13px;color:var(--dark);">Research Question</strong>
+        <p style="font-size:14px;color:var(--gray-600);margin-top:6px;line-height:1.7;font-style:italic;">"${escHtml(r.question)}"</p>
+      </div>
+      <div style="margin-bottom:16px;">
+        <strong style="font-size:13px;color:var(--dark);">Abstract / Description</strong>
+        <p style="font-size:14px;color:var(--gray-600);margin-top:6px;line-height:1.8;">${escHtml(r.description)}</p>
+      </div>
+      ${r.methodology ? `
+        <div style="margin-bottom:16px;">
+          <strong style="font-size:13px;color:var(--dark);">Methodology</strong>
+          <p style="font-size:14px;color:var(--gray-600);margin-top:6px;">${escHtml(r.methodology)}</p>
+        </div>
+      ` : ''}
+      ${r.tools && r.tools.length ? `
+        <div style="margin-bottom:16px;">
+          <strong style="font-size:13px;color:var(--dark);display:block;margin-bottom:8px;">Tools Used</strong>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">${r.tools.map(t => `<span class="project-tag">${escHtml(t)}</span>`).join('')}</div>
+        </div>
+      ` : ''}
+      ${r.supervisor ? `<p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;"><i class="fas fa-user-tie"></i> Supervisor: ${escHtml(r.supervisor)}</p>` : ''}
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;">
+        ${r.paperUrl ? `<a href="${r.paperUrl}" class="btn-primary" target="_blank" rel="noopener noreferrer" style="font-size:13px;padding:9px 18px;"><i class="fas fa-file-alt"></i> Paper</a>` : ''}
+        ${r.githubUrl ? `<a href="${r.githubUrl}" class="btn-secondary" target="_blank" rel="noopener noreferrer" style="font-size:13px;padding:9px 18px;"><i class="fab fa-github"></i> Code</a>` : ''}
+      </div>
+    `;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderExperience() {
+    const experience = DataManager.get('experience');
+    const timeline = document.getElementById('experience-timeline');
+    if (!timeline) return;
+    if (!experience || !experience.length) {
+      timeline.innerHTML = '<div class="empty-state"><i class="fas fa-briefcase"></i><p>No experience entries yet. Go to Admin to add experience.</p></div>';
+      return;
+    }
+    timeline.innerHTML = experience.map(exp => `
+      <div class="timeline-item fade-up">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-header">
+            <div>
+              <div class="timeline-title">${escHtml(exp.position)}</div>
+              <div class="timeline-org">${escHtml(exp.organization)}</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="timeline-date"><i class="far fa-calendar-alt"></i> ${formatDate(exp.startDate)} — ${exp.current ? 'Present' : formatDate(exp.endDate)}</div>
+              <div class="timeline-date" style="margin-top:3px;"><i class="fas fa-map-pin"></i> ${escHtml(exp.location||'')}</div>
+            </div>
+          </div>
+          <span class="timeline-type">${escHtml(exp.type)}</span>
+          <p class="timeline-desc">${escHtml(exp.description)}</p>
+          ${exp.responsibilities && exp.responsibilities.length ? `
+            <ul style="margin-top:12px;padding-left:16px;font-size:13px;color:var(--gray-600);line-height:1.8;">
+              ${exp.responsibilities.map(r => `<li>${escHtml(r)}</li>`).join('')}
+            </ul>
+          ` : ''}
+          ${exp.skills && exp.skills.length ? `
+            <div class="timeline-skills">${exp.skills.map(s => `<span class="timeline-skill">${escHtml(s)}</span>`).join('')}</div>
+          ` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderEducation() {
+    const education = DataManager.get('education');
+    const grid = document.getElementById('education-grid');
+    if (!grid) return;
+    if (!education || !education.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-graduation-cap"></i><p>No education entries yet.</p></div>';
+      return;
+    }
+    grid.innerHTML = education.map(edu => `
+      <div class="edu-card fade-up">
+        <div class="edu-logo"><i class="fas fa-university"></i></div>
+        <div class="edu-content">
+          <div class="edu-degree">${escHtml(edu.degree)} in ${escHtml(edu.program)}</div>
+          <div class="edu-institution">${escHtml(edu.institution)}</div>
+          <div class="edu-dept">${escHtml(edu.department)}</div>
+          <div class="edu-meta">
+            <div class="edu-meta-item"><i class="far fa-calendar-alt"></i> ${escHtml(edu.startYear)} — ${edu.current ? 'Present' : escHtml(edu.endYear)}</div>
+            ${edu.cgpa ? `<div class="edu-meta-item"><i class="fas fa-star"></i> CGPA: ${escHtml(edu.cgpa)}</div>` : ''}
+          </div>
+          ${edu.coursework && edu.coursework.length ? `
+            <div style="margin-top:12px;">
+              <div style="font-size:12px;font-weight:600;color:var(--gray-700);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em;">Relevant Coursework</div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                ${edu.coursework.map(c => `<span class="timeline-skill">${escHtml(c)}</span>`).join('')}
+              </div>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderSkills() {
+    const skills = DataManager.get('skills');
+    const container = document.getElementById('skills-container');
+    if (!container) return;
+    if (!skills || !skills.length) {
+      container.innerHTML = '<div class="empty-state"><i class="fas fa-tools"></i><p>No skills added yet.</p></div>';
+      return;
+    }
+    container.innerHTML = skills.map(group => `
+      <div class="fade-up">
+        <div class="skill-group-title"><i class="fas ${group.icon||'fa-star'}"></i> ${escHtml(group.category)}</div>
+        <div class="skill-tags">
+          ${group.skills.map(skill => `
+            <div class="skill-tag">
+              <i class="fas fa-check-circle"></i>
+              <span>${escHtml(skill.name)}</span>
+              <span class="level">(${escHtml(skill.level)})</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  let allCerts = [];
+  function renderCertificates() {
+    allCerts = DataManager.get('certificates');
+    const filters = document.getElementById('cert-filters');
+    if (filters) {
+      const categories = ['All', ...new Set(allCerts.map(c => c.category))];
+      filters.innerHTML = categories.map((cat, i) =>
+        `<button class="filter-btn ${i===0?'active':''}" data-filter="${escHtml(cat)}">${escHtml(cat)}</button>`
+      ).join('');
+      filters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterCerts(btn.dataset.filter);
+        });
+      });
+    }
+    filterCerts('All');
+  }
+
+  function filterCerts(category) {
+    const grid = document.getElementById('cert-grid');
+    if (!grid) return;
+    const filtered = category === 'All' ? allCerts : allCerts.filter(c => c.category === category);
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-certificate"></i><p>No certificates in this category.</p></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(cert => `
+      <div class="cert-card fade-up">
+        ${cert.image
+          ? `<img src="${cert.image}" alt="${escHtml(cert.name)}" class="cert-image" loading="lazy" />`
+          : `<div class="cert-image-placeholder"><i class="fas fa-certificate"></i><span style="font-size:11px;">${escHtml(cert.category)}</span></div>`
+        }
+        <div class="cert-body">
+          <span class="cert-category">${escHtml(cert.category)}</span>
+          <div class="cert-name">${escHtml(cert.name)}</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> ${escHtml(cert.organization)}</div>
+          <div class="cert-date"><i class="far fa-calendar-alt"></i> ${formatDate(cert.date)}</div>
+          <div class="cert-actions">
+            ${cert.credentialUrl ? `<a href="${cert.credentialUrl}" class="cert-btn primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> View</a>` : ''}
+            ${cert.pdfUrl ? `<a href="${cert.pdfUrl}" class="cert-btn outline" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> PDF</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+    observeElements();
+  }
+
+  function renderPublications() {
+    const publications = DataManager.get('publications');
+    const list = document.getElementById('publications-list');
+    if (!list) return;
+    if (!publications || !publications.length) {
+      list.innerHTML = '<div class="empty-state"><i class="fas fa-book-open"></i><p>No publications added yet. Go to Admin to add publications.</p></div>';
+      return;
+    }
+    list.innerHTML = publications.map((pub, i) => `
+      <div class="pub-card fade-up">
+        <div class="pub-index">${String(i+1).padStart(2,'0')}</div>
+        <div class="pub-content">
+          <span class="pub-type">${escHtml(pub.type)}</span>
+          <div class="pub-title">${escHtml(pub.title)}</div>
+          <div class="pub-authors">${escHtml(pub.authors)}</div>
+          <div class="pub-journal">${escHtml(pub.journal)} · ${escHtml(pub.date)}</div>
+          ${pub.abstract ? `<p style="font-size:13px;color:var(--gray-600);line-height:1.7;margin-top:6px;">${escHtml(pub.abstract.substring(0,200))}${pub.abstract.length>200?'...':''}</p>` : ''}
+          ${pub.keywords && pub.keywords.length ? `
+            <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">${pub.keywords.map(k => `<span class="project-tag">${escHtml(k)}</span>`).join('')}</div>
+          ` : ''}
+          <div class="pub-links">
+            ${pub.paperUrl ? `<a href="${pub.paperUrl}" class="pub-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Paper</a>` : ''}
+            ${pub.pdfUrl ? `<a href="${pub.pdfUrl}" class="pub-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> PDF</a>` : ''}
+            ${pub.doi ? `<a href="https://doi.org/${pub.doi}" class="pub-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i> DOI</a>` : ''}
+            ${pub.scholarUrl ? `<a href="${pub.scholarUrl}" class="pub-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> Scholar</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderAchievements() {
+    const achievements = DataManager.get('achievements');
+    const grid = document.getElementById('achievements-grid');
+    if (!grid) return;
+    if (!achievements || !achievements.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><i class="fas fa-trophy"></i><p>No achievements added yet.</p></div>';
+      return;
+    }
+    grid.innerHTML = achievements.map(a => `
+      <div class="achieve-card fade-up">
+        <div class="achieve-icon">${a.icon||'🏆'}</div>
+        <span class="achieve-category">${escHtml(a.category)}</span>
+        <div class="achieve-title">${escHtml(a.title)}</div>
+        <div class="achieve-org">${escHtml(a.organization)}</div>
+        <div class="achieve-date">${formatDate(a.date)}</div>
+        <div class="achieve-desc">${escHtml(a.description)}</div>
+        ${a.url ? `<a href="${a.url}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:12px;color:var(--primary);text-decoration:none;font-weight:600;"><i class="fas fa-external-link-alt"></i> Learn More</a>` : ''}
+      </div>
+    `).join('');
+  }
+
+  function renderContactCards(profile, social) {
+    const container = document.getElementById('contact-cards');
+    if (!container) return;
+    const items = [
+      { icon:'fa-envelope', label:'Email', value: profile.email, href:`mailto:${profile.email}` },
+      { icon:'fa-map-pin', label:'Location', value: profile.location, href:'#' },
+      { icon:'fa-university', label:'University', value: profile.university, href:'#' },
+    ];
+    const socialItems = (social||[]).filter(s => s.display && s.url && s.url !== '#').slice(0,3);
+    container.innerHTML = items.map(item => `
+      <a href="${item.href}" class="contact-card">
+        <div class="contact-icon"><i class="fas ${item.icon}"></i></div>
+        <div>
+          <div class="contact-card-label">${escHtml(item.label)}</div>
+          <div class="contact-card-value">${escHtml(item.value||'')}</div>
+        </div>
+      </a>
+    `).join('') + socialItems.map(s => `
+      <a href="${s.url}" class="contact-card" target="_blank" rel="noopener noreferrer">
+        <div class="contact-icon"><i class="${s.icon}"></i></div>
+        <div>
+          <div class="contact-card-label">${escHtml(s.platform)}</div>
+          <div class="contact-card-value">View Profile</div>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // ============================================================
+  // HERO CANVAS — GIS-inspired topographic lines
+  // ============================================================
+  function initHeroCanvas() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, lines;
+    function resize() {
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+      generateLines();
+    }
+    function generateLines() {
+      lines = [];
+      const numLines = 12;
+      for (let i = 0; i < numLines; i++) {
+        const pts = [];
+        const y = (h / numLines) * i + 20;
+        for (let x = -50; x <= w + 50; x += 40) {
+          pts.push({ x, y: y + Math.sin(x * 0.008 + i * 0.7) * (20 + Math.random() * 30) });
+        }
+        lines.push(pts);
+      }
+    }
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      lines.forEach((pts, i) => {
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (let j = 1; j < pts.length; j++) {
+          const xc = (pts[j].x + pts[j-1].x) / 2;
+          const yc = (pts[j].y + pts[j-1].y) / 2;
+          ctx.quadraticCurveTo(pts[j-1].x, pts[j-1].y, xc, yc);
+        }
+        ctx.strokeStyle = `rgba(96,165,250,${0.08 + (i / lines.length) * 0.08})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    }
+    window.addEventListener('resize', () => { resize(); draw(); });
+    resize(); draw();
+  }
+
+  // ============================================================
+  // NAVBAR & SCROLL
+  // ============================================================
+  function initNavbar() {
+    const navbar = document.getElementById('navbar');
+    const progressBar = document.getElementById('progress-bar');
+    const backTop = document.getElementById('back-to-top');
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      // Scrolled
+      navbar.classList.toggle('scrolled', y > 30);
+      // Progress
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (docH > 0 ? (y / docH * 100) : 0) + '%';
+      // Back to top
+      backTop.classList.toggle('visible', y > 400);
+      // Active link
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        const bottom = top + section.offsetHeight;
+        if (y >= top && y < bottom) {
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.section === section.id);
+          });
+        }
+      });
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Back to top
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', () => ThemeManager.toggle());
+  }
+
+  // ============================================================
+  // SCROLL ANIMATIONS
+  // ============================================================
+  function observeElements() {
+    const elements = document.querySelectorAll('.fade-up:not(.visible), .fade-in:not(.visible)');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    elements.forEach(el => observer.observe(el));
+  }
+
+  // ============================================================
+  // CONTACT FORM
+  // ============================================================
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const subject = document.getElementById('contact-subject').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+      if (!name || !email || !subject || !message) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      const profile = DataManager.get('profile');
+      const to = profile.email || 'sarwarjony@kuet.ac.bd';
+      const mailtoUrl = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+      window.location.href = mailtoUrl;
+    });
+  }
+
+  // ============================================================
+  // MODAL
+  // ============================================================
+  function initModal() {
+    const overlay = document.getElementById('project-modal');
+    const closeBtn = document.getElementById('modal-close');
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  }
+
+  function closeModal() {
+    document.getElementById('project-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ============================================================
+  // UTILS
+  // ============================================================
+  function escHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+      if (dateStr.length === 4) return dateStr;
+      const d = new Date(dateStr + '-01');
+      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    } catch(e) { return dateStr; }
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    ThemeManager.init();
+    initNavbar();
+    renderProfile();
+    renderInterests();
+    renderResearch();
+    renderProjects();
+    renderExperience();
+    renderEducation();
+    renderSkills();
+    renderPublications();
+    renderCertificates();
+    renderAchievements();
+    initContactForm();
+    initModal();
+    initHeroCanvas();
+    setTimeout(observeElements, 100);
+  });
+  </script>
+</body>
+</html>

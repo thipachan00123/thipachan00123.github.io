@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Admin — Sarwar Jony</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #2563EB; --primary-dark: #1d4ed8; --primary-light: #eff6ff;
+      --secondary: #10B981; --secondary-light: #ecfdf5;
+      --danger: #ef4444; --danger-light: #fef2f2;
+      --warning: #f59e0b; --warning-light: #fffbeb;
+      --success: #22c55e; --success-light: #f0fdf4;
+      --dark: #0f172a; --sidebar-bg: #0f172a; --sidebar-text: #94a3b8;
+      --sidebar-active: #1e293b; --sidebar-hover: #1e293b;
+      --body-bg: #f1f5f9; --card-bg: #ffffff;
+      --border: #e2e8f0; --text: #1e293b; --text-muted: #64748b;
+      --input-bg: #f8fafc; --radius: 10px; --font: 'Inter', sans-serif;
+      --shadow: 0 1px 3px rgba(0,0,0,0.1); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:var(--font); background:var(--body-bg); color:var(--text); display:flex; min-height:100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width:260px; min-height:100vh; background:var(--sidebar-bg);
+      display:flex; flex-direction:column; position:fixed; top:0; left:0; bottom:0;
+      z-index:100; transition:transform 0.3s ease;
+    }
+    .sidebar-header {
+      padding:20px; border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-brand { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+    .sidebar-logo {
+      width:36px; height:36px; border-radius:8px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-weight:800; font-size:13px;
+    }
+    .sidebar-name { color:white; font-weight:700; font-size:15px; }
+    .sidebar-sub { color:#475569; font-size:11px; padding-left:46px; }
+    .sidebar-nav { flex:1; padding:16px 0; overflow-y:auto; }
+    .sidebar-section-label {
+      color:#334155; font-size:10px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.08em; padding:8px 20px 4px;
+    }
+    .sidebar-item {
+      display:flex; align-items:center; gap:10px;
+      padding:10px 20px; color:var(--sidebar-text); cursor:pointer;
+      transition:all 0.2s; border:none; background:none; width:100%; text-align:left;
+      font-family:var(--font); font-size:14px; border-radius:0;
+      text-decoration:none;
+    }
+    .sidebar-item:hover { background:var(--sidebar-hover); color:#e2e8f0; }
+    .sidebar-item.active { background:var(--primary); color:white; }
+    .sidebar-item i { width:16px; text-align:center; font-size:14px; flex-shrink:0; }
+    .sidebar-badge {
+      margin-left:auto; padding:1px 7px; border-radius:50px;
+      background:rgba(37,99,235,0.3); color:#93c5fd;
+      font-size:10px; font-weight:700;
+    }
+    .sidebar-item.active .sidebar-badge { background:rgba(255,255,255,0.2); color:white; }
+    .sidebar-footer {
+      padding:16px; border-top:1px solid rgba(255,255,255,0.06);
+      display:flex; align-items:center; gap:10px;
+    }
+    .sidebar-footer a {
+      display:flex; align-items:center; gap:6px; color:#94a3b8; font-size:13px;
+      text-decoration:none; transition:color 0.2s;
+    }
+    .sidebar-footer a:hover { color:white; }
+
+    /* MAIN */
+    .main {
+      margin-left:260px; flex:1; display:flex; flex-direction:column; min-height:100vh;
+    }
+    .topbar {
+      background:var(--card-bg); border-bottom:1px solid var(--border);
+      padding:0 24px; height:64px; display:flex; align-items:center;
+      justify-content:space-between; position:sticky; top:0; z-index:50;
+      box-shadow:var(--shadow);
+    }
+    .topbar-left { display:flex; align-items:center; gap:12px; }
+    .topbar-title { font-size:18px; font-weight:700; color:var(--text); }
+    .topbar-subtitle { font-size:13px; color:var(--text-muted); }
+    .topbar-right { display:flex; align-items:center; gap:10px; }
+    .topbar-btn {
+      display:inline-flex; align-items:center; gap:6px;
+      padding:8px 14px; border-radius:8px; font-size:13px; font-weight:600;
+      cursor:pointer; border:none; font-family:var(--font); transition:all 0.2s;
+      text-decoration:none;
+    }
+    .btn-primary { background:var(--primary); color:white; }
+    .btn-primary:hover { background:var(--primary-dark); }
+    .btn-outline { background:white; color:var(--text); border:1.5px solid var(--border); }
+    .btn-outline:hover { border-color:var(--primary); color:var(--primary); }
+    .btn-danger { background:var(--danger-light); color:var(--danger); border:none; }
+    .btn-danger:hover { background:var(--danger); color:white; }
+    .btn-success { background:var(--success-light); color:#15803d; border:none; }
+    .btn-success:hover { background:var(--success); color:white; }
+    .btn-warning { background:var(--warning-light); color:#92400e; border:none; }
+    .btn-sm { padding:6px 12px; font-size:12px; }
+    .btn-xs { padding:4px 8px; font-size:11px; }
+
+    .content { flex:1; padding:24px; max-width:1200px; width:100%; }
+
+    /* CARDS */
+    .card {
+      background:var(--card-bg); border-radius:var(--radius);
+      border:1px solid var(--border); overflow:hidden;
+    }
+    .card-header {
+      padding:18px 20px; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    }
+    .card-title { font-size:15px; font-weight:700; color:var(--text); }
+    .card-body { padding:20px; }
+
+    /* STAT CARDS */
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:16px; margin-bottom:24px; }
+    .stat-card {
+      background:var(--card-bg); border-radius:var(--radius); border:1px solid var(--border);
+      padding:20px; display:flex; align-items:center; gap:14px; transition:all 0.2s;
+    }
+    .stat-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+    .stat-icon {
+      width:44px; height:44px; border-radius:10px; flex-shrink:0;
+      display:flex; align-items:center; justify-content:center; font-size:18px;
+    }
+    .stat-icon.blue { background:#eff6ff; color:#2563eb; }
+    .stat-icon.green { background:#ecfdf5; color:#059669; }
+    .stat-icon.purple { background:#f5f3ff; color:#7c3aed; }
+    .stat-icon.orange { background:#fff7ed; color:#ea580c; }
+    .stat-icon.pink { background:#fdf2f8; color:#9d174d; }
+    .stat-icon.teal { background:#f0fdfa; color:#0f766e; }
+    .stat-num { font-size:24px; font-weight:800; color:var(--text); line-height:1; }
+    .stat-label { font-size:12px; color:var(--text-muted); margin-top:2px; }
+
+    /* FORMS */
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .form-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+    .form-group { margin-bottom:0; }
+    .form-group.full { grid-column:1/-1; }
+    label { display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px; }
+    label .required { color:var(--danger); margin-left:2px; }
+    label .hint { font-weight:400; color:var(--text-muted); font-size:11px; margin-left:6px; }
+    input, select, textarea {
+      width:100%; padding:9px 12px; border-radius:8px;
+      border:1.5px solid var(--border); background:var(--input-bg);
+      color:var(--text); font-size:14px; font-family:var(--font);
+      transition:all 0.2s; outline:none;
+    }
+    input:focus, select:focus, textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,0.08); }
+    input.error, select.error, textarea.error { border-color:var(--danger); }
+    .error-msg { color:var(--danger); font-size:11px; margin-top:4px; display:none; }
+    .error-msg.show { display:block; }
+    textarea { resize:vertical; min-height:100px; }
+    .form-hint { font-size:11px; color:var(--text-muted); margin-top:4px; }
+
+    /* CHECKBOX & TOGGLE */
+    .checkbox-row { display:flex; align-items:center; gap:8px; }
+    .checkbox-row input[type="checkbox"] { width:16px; height:16px; border-radius:4px; cursor:pointer; accent-color:var(--primary); }
+    .checkbox-row label { margin:0; font-weight:500; cursor:pointer; }
+
+    /* TAGS INPUT */
+    .tags-container {
+      display:flex; flex-wrap:wrap; gap:6px; align-items:center;
+      padding:8px; border:1.5px solid var(--border); border-radius:8px;
+      background:var(--input-bg); min-height:42px; cursor:text;
+    }
+    .tags-container:focus-within { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,0.08); }
+    .tag-item {
+      display:inline-flex; align-items:center; gap:4px;
+      padding:3px 8px; border-radius:50px; background:rgba(37,99,235,0.08);
+      color:var(--primary); font-size:12px; font-weight:600;
+    }
+    .tag-remove { cursor:pointer; font-size:11px; opacity:0.7; background:none; border:none; color:inherit; padding:0; }
+    .tag-remove:hover { opacity:1; }
+    .tags-input { border:none; background:none; outline:none; font-size:13px; min-width:120px; padding:2px 4px; color:var(--text); }
+
+    /* TABLE */
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; }
+    th { background:#f8fafc; padding:10px 14px; text-align:left; font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; border-bottom:1px solid var(--border); }
+    td { padding:12px 14px; border-bottom:1px solid var(--border); font-size:13px; color:var(--text); vertical-align:middle; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:#f8fafc; }
+    .td-title { font-weight:600; max-width:280px; }
+    .td-title p { font-size:11px; color:var(--text-muted); font-weight:400; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    /* STATUS BADGES */
+    .badge {
+      display:inline-flex; align-items:center; gap:4px;
+      padding:3px 9px; border-radius:50px; font-size:11px; font-weight:600;
+    }
+    .badge-blue { background:#eff6ff; color:#2563eb; }
+    .badge-green { background:#ecfdf5; color:#059669; }
+    .badge-purple { background:#f5f3ff; color:#7c3aed; }
+    .badge-yellow { background:#fffbeb; color:#d97706; }
+    .badge-red { background:#fef2f2; color:#dc2626; }
+    .badge-gray { background:#f1f5f9; color:#64748b; }
+
+    /* ACTIONS */
+    .actions { display:flex; gap:6px; }
+
+    /* MODAL */
+    .modal-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000;
+      display:none; align-items:center; justify-content:center; padding:20px;
+      backdrop-filter:blur(4px);
+    }
+    .modal-overlay.open { display:flex; }
+    .modal-box {
+      background:var(--card-bg); border-radius:14px;
+      width:100%; max-width:700px; max-height:90vh; overflow-y:auto;
+      box-shadow:0 20px 40px rgba(0,0,0,0.15);
+    }
+    .modal-header {
+      padding:20px 24px; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:var(--card-bg); z-index:10;
+    }
+    .modal-title { font-size:17px; font-weight:700; color:var(--text); }
+    .modal-close { width:32px; height:32px; border-radius:8px; border:none; background:#f1f5f9; color:var(--text-muted); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; }
+    .modal-close:hover { background:var(--border); }
+    .modal-body { padding:24px; }
+    .modal-footer { padding:16px 24px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:10px; }
+
+    /* ALERTS */
+    .alert {
+      padding:12px 16px; border-radius:8px; font-size:13px; margin-bottom:16px;
+      display:flex; align-items:center; gap:10px;
+    }
+    .alert-success { background:var(--success-light); color:#15803d; border:1px solid #bbf7d0; }
+    .alert-error { background:var(--danger-light); color:#b91c1c; border:1px solid #fecaca; }
+    .alert-info { background:var(--primary-light); color:var(--primary); border:1px solid #bfdbfe; }
+    .alert-warning { background:var(--warning-light); color:#92400e; border:1px solid #fde68a; }
+
+    /* QUICK ACTIONS */
+    .quick-actions { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+    .qa-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 18px; border-radius:10px; font-size:13px; font-weight:600;
+      cursor:pointer; border:1.5px solid var(--border); background:var(--card-bg);
+      color:var(--text); font-family:var(--font); transition:all 0.2s; text-decoration:none;
+    }
+    .qa-btn:hover { border-color:var(--primary); color:var(--primary); background:var(--primary-light); }
+    .qa-btn i { font-size:14px; }
+
+    /* MEDIA */
+    .media-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+    .media-item {
+      border:1.5px solid var(--border); border-radius:10px; overflow:hidden;
+      transition:all 0.2s; position:relative;
+    }
+    .media-item:hover { border-color:var(--primary); box-shadow:var(--shadow-md); }
+    .media-thumb { width:100%; height:120px; object-fit:cover; display:block; background:#f1f5f9; }
+    .media-thumb-placeholder { width:100%; height:120px; background:#f1f5f9; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:28px; }
+    .media-name { padding:8px; font-size:11px; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    /* PROFILE PHOTO UPLOAD */
+    .photo-upload-area {
+      border:2px dashed var(--border); border-radius:12px;
+      padding:32px; text-align:center; cursor:pointer;
+      transition:all 0.2s; background:var(--input-bg);
+    }
+    .photo-upload-area:hover { border-color:var(--primary); background:var(--primary-light); }
+    .photo-upload-area i { font-size:36px; color:var(--text-muted); margin-bottom:10px; display:block; }
+    .photo-upload-area p { font-size:13px; color:var(--text-muted); }
+    .photo-preview { width:120px; height:120px; border-radius:12px; object-fit:cover; border:2px solid var(--border); display:block; margin:0 auto 12px; }
+
+    /* SEARCH */
+    .search-bar {
+      display:flex; align-items:center; gap:8px; padding:8px 12px;
+      border:1.5px solid var(--border); border-radius:8px; background:var(--input-bg);
+    }
+    .search-bar input { border:none; background:none; outline:none; font-size:14px; color:var(--text); width:100%; }
+    .search-bar i { color:var(--text-muted); }
+
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      .sidebar { transform:translateX(-100%); }
+      .sidebar.open { transform:translateX(0); }
+      .main { margin-left:0; }
+      .form-grid { grid-template-columns:1fr; }
+      .form-grid-3 { grid-template-columns:1fr; }
+      .stat-grid { grid-template-columns:1fr 1fr; }
+    }
+
+    /* SECTION PANELS */
+    .panel { display:none; }
+    .panel.active { display:block; }
+
+    /* DRAG HANDLE */
+    .drag-handle { cursor:grab; color:var(--text-muted); font-size:14px; }
+    .drag-handle:active { cursor:grabbing; }
+
+    /* COLOR SWATCH */
+    .color-swatch {
+      display:flex; align-items:center; gap:8px;
+    }
+    .color-swatch input[type="color"] {
+      width:44px; height:36px; border-radius:6px; cursor:pointer; padding:2px;
+    }
+
+    /* EMPTY STATE */
+    .empty-state { text-align:center; padding:48px 24px; color:var(--text-muted); }
+    .empty-state i { font-size:40px; opacity:0.4; display:block; margin-bottom:12px; }
+    .empty-state p { font-size:14px; }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">SJ</div>
+      <span class="sidebar-name">Portfolio Admin</span>
+    </div>
+    <div class="sidebar-sub">Content Management System</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Overview</div>
+    <button class="sidebar-item active" data-panel="dashboard"><i class="fas fa-th-large"></i> Dashboard</button>
+
+    <div class="sidebar-section-label">Content</div>
+    <button class="sidebar-item" data-panel="profile"><i class="fas fa-user-circle"></i> Profile</button>
+    <button class="sidebar-item" data-panel="projects"><i class="fas fa-layer-group"></i> Projects <span class="sidebar-badge" id="badge-projects">0</span></button>
+    <button class="sidebar-item" data-panel="research"><i class="fas fa-flask"></i> Research <span class="sidebar-badge" id="badge-research">0</span></button>
+    <button class="sidebar-item" data-panel="experience"><i class="fas fa-briefcase"></i> Experience <span class="sidebar-badge" id="badge-experience">0</span></button>
+    <button class="sidebar-item" data-panel="education"><i class="fas fa-graduation-cap"></i> Education <span class="sidebar-badge" id="badge-education">0</span></button>
+    <button class="sidebar-item" data-panel="skills"><i class="fas fa-tools"></i> Skills</button>
+    <button class="sidebar-item" data-panel="certificates"><i class="fas fa-certificate"></i> Certificates <span class="sidebar-badge" id="badge-certs">0</span></button>
+    <button class="sidebar-item" data-panel="publications"><i class="fas fa-book-open"></i> Publications <span class="sidebar-badge" id="badge-pubs">0</span></button>
+    <button class="sidebar-item" data-panel="achievements"><i class="fas fa-trophy"></i> Achievements <span class="sidebar-badge" id="badge-achieve">0</span></button>
+    <button class="sidebar-item" data-panel="interests"><i class="fas fa-compass"></i> Research Interests</button>
+
+    <div class="sidebar-section-label">Settings</div>
+    <button class="sidebar-item" data-panel="social"><i class="fas fa-share-nodes"></i> Social Links</button>
+    <button class="sidebar-item" data-panel="settings"><i class="fas fa-cog"></i> Website Settings</button>
+    <button class="sidebar-item" data-panel="backup"><i class="fas fa-database"></i> Backup / Export</button>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Public Site</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div>
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="topbar-subtitle" id="topbar-subtitle">Portfolio overview and quick actions</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="index.html" target="_blank" class="topbar-btn btn-outline"><i class="fas fa-eye"></i> Preview Site</a>
+      <button class="topbar-btn btn-success" id="save-all-btn" onclick="saveCurrentPanel()"><i class="fas fa-save"></i> Save</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Toast Notification -->
+    <div id="toast" style="display:none;position:fixed;top:80px;right:24px;z-index:9999;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(0,0,0,0.15);min-width:260px;"></div>
+
+    <!-- ============== DASHBOARD ============== -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="alert alert-info"><i class="fas fa-info-circle"></i> <strong>Non-Coder Mode:</strong> Edit everything here. All changes save to your browser. Use Backup/Export to download your data.</div>
+      <div class="stat-grid" id="dash-stats"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" class="dash-grid">
+        <div class="card">
+          <div class="card-header"><div class="card-title">⚡ Quick Actions</div></div>
+          <div class="card-body">
+            <div class="quick-actions" id="quick-actions">
+              <button class="qa-btn" onclick="openPanel('projects');setTimeout(()=>openAddModal('projects'),300)"><i class="fas fa-plus"></i> Add Project</button>
+              <button class="qa-btn" onclick="openPanel('research');setTimeout(()=>openAddModal('research'),300)"><i class="fas fa-plus"></i> Add Research</button>
+              <button class="qa-btn" onclick="openPanel('certificates');setTimeout(()=>openAddModal('certificates'),300)"><i class="fas fa-plus"></i> Add Certificate</button>
+              <button class="qa-btn" onclick="openPanel('experience');setTimeout(()=>openAddModal('experience'),300)"><i class="fas fa-plus"></i> Add Experience</button>
+              <button class="qa-btn" onclick="openPanel('publications');setTimeout(()=>openAddModal('publications'),300)"><i class="fas fa-plus"></i> Add Publication</button>
+              <button class="qa-btn" onclick="openPanel('achievements');setTimeout(()=>openAddModal('achievements'),300)"><i class="fas fa-plus"></i> Add Achievement</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">📋 Getting Started</div></div>
+          <div class="card-body">
+            <ol style="font-size:13px;color:var(--text-muted);line-height:2;padding-left:16px;">
+              <li>Go to <strong>Profile</strong> → Add your name, photo, bio, email</li>
+              <li>Go to <strong>Social Links</strong> → Add your LinkedIn, GitHub, etc.</li>
+              <li>Go to <strong>Projects</strong> → Add your GIS & URP projects</li>
+              <li>Go to <strong>Research</strong> → Add your research work</li>
+              <li>Go to <strong>Certificates</strong> → Add your certificates</li>
+              <li>Go to <strong>Backup / Export</strong> → Export your data</li>
+              <li>Click <strong>Preview Site</strong> to see the result</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== PROFILE ============== -->
+    <div class="panel" id="panel-profile">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Edit Profile</div></div>
+        <div class="card-body" id="profile-form-container">
+          <div class="alert alert-info" style="margin-bottom:20px;"><i class="fas fa-info-circle"></i> Fill in your personal information. Click Save when done.</div>
+          <!-- Profile Photo -->
+          <div style="margin-bottom:24px;">
+            <label>Profile Photo</label>
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+              <div id="profile-photo-preview" style="width:100px;height:100px;border-radius:12px;overflow:hidden;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;background:#f1f5f9;color:#94a3b8;font-size:32px;">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div style="flex:1;">
+                <label for="profile-photo-url">Photo URL <span class="hint">(paste image link or leave blank)</span></label>
+                <input type="url" id="profile-photo-url" placeholder="https://example.com/photo.jpg" />
+                <p class="form-hint">Paste a direct image URL. For local files, upload to your GitHub repo first.</p>
+                <label for="profile-photo-file" style="margin-top:8px;">Or select local file <span class="hint">(for testing only)</span></label>
+                <input type="file" id="profile-photo-file" accept="image/*" style="margin-top:4px;" />
+              </div>
+            </div>
+          </div>
+          <div class="form-grid" style="gap:16px;">
+            <div class="form-group">
+              <label>Full Name <span class="required">*</span></label>
+              <input type="text" id="profile-name" placeholder="Sarwar Jony" />
+              <div class="error-msg" id="profile-name-err">Name is required.</div>
+            </div>
+            <div class="form-group">
+              <label>Professional Title</label>
+              <input type="text" id="profile-title" placeholder="Urban & Regional Planning Student | GIS Enthusiast" />
+            </div>
+            <div class="form-group">
+              <label>Short Tagline</label>
+              <input type="text" id="profile-tagline" placeholder="Aspiring Researcher | Spatial Data Enthusiast" />
+            </div>
+            <div class="form-group">
+              <label>University</label>
+              <input type="text" id="profile-university" placeholder="KUET" />
+            </div>
+            <div class="form-group">
+              <label>Department</label>
+              <input type="text" id="profile-department" placeholder="Urban & Regional Planning" />
+            </div>
+            <div class="form-group">
+              <label>Email <span class="required">*</span></label>
+              <input type="email" id="profile-email" placeholder="sarwarjony@kuet.ac.bd" />
+              <div class="error-msg" id="profile-email-err">Valid email required.</div>
+            </div>
+            <div class="form-group">
+              <label>Phone <span class="hint">(optional)</span></label>
+              <input type="tel" id="profile-phone" placeholder="+880 1xxx-xxxxxx" />
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="profile-location" placeholder="Khulna, Bangladesh" />
+            </div>
+            <div class="form-group full">
+              <label>Short Biography</label>
+              <textarea id="profile-bio" rows="3" placeholder="I am a passionate Urban & Regional Planning student..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label>Long Biography <span class="hint">(second paragraph)</span></label>
+              <textarea id="profile-bio2" rows="3" placeholder="My research interests center on..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>CV / Resume URL</label>
+              <input type="url" id="profile-cvUrl" placeholder="https://example.com/cv.pdf" />
+              <div class="form-hint">Upload your CV to Google Drive, Dropbox, or your GitHub repo and paste the direct link.</div>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border);">
+            <div class="card-title" style="margin-bottom:14px;">Academic & Social Profiles</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label><i class="fab fa-linkedin" style="color:#0077b5;"></i> LinkedIn URL</label>
+                <input type="url" id="profile-linkedin" placeholder="https://linkedin.com/in/username" />
+              </div>
+              <div class="form-group">
+                <label><i class="fab fa-github"></i> GitHub URL</label>
+                <input type="url" id="profile-github" placeholder="https://github.com/username" />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-graduation-cap" style="color:#4285F4;"></i> Google Scholar URL</label>
+                <input type="url" id="profile-scholar" placeholder="https://scholar.google.com/citations?user=..." />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-id-card" style="color:#a6ce39;"></i> ORCID URL</label>
+                <input type="url" id="profile-orcid" placeholder="https://orcid.org/0000-0000-0000-0000" />
+              </div>
+              <div class="form-group">
+                <label><i class="fab fa-researchgate" style="color:#00ccbb;"></i> ResearchGate URL</label>
+                <input type="url" id="profile-researchgate" placeholder="https://www.researchgate.net/profile/..." />
+              </div>
+              <div class="form-group">
+                <label><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube URL</label>
+                <input type="url" id="profile-youtube" placeholder="https://youtube.com/@channel" />
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:24px;display:flex;gap:10px;">
+            <button class="topbar-btn btn-primary" onclick="saveProfile()"><i class="fas fa-save"></i> Save Profile</button>
+            <a href="index.html" target="_blank" class="topbar-btn btn-outline"><i class="fas fa-eye"></i> Preview</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== PROJECTS ============== -->
+    <div class="panel" id="panel-projects">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Projects</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div class="search-bar" style="width:220px;"><i class="fas fa-search"></i><input type="text" id="projects-search" placeholder="Search projects..." oninput="renderProjectsTable()" /></div>
+            <button class="topbar-btn btn-primary" onclick="openAddModal('projects')"><i class="fas fa-plus"></i> Add Project</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Title</th><th>Category</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody id="projects-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== RESEARCH ============== -->
+    <div class="panel" id="panel-research">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Research Projects</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('research')"><i class="fas fa-plus"></i> Add Research</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Title</th><th>Area</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="research-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== EXPERIENCE ============== -->
+    <div class="panel" id="panel-experience">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Experience</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('experience')"><i class="fas fa-plus"></i> Add Experience</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Position</th><th>Organization</th><th>Type</th><th>Current</th><th>Actions</th></tr></thead>
+          <tbody id="experience-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== EDUCATION ============== -->
+    <div class="panel" id="panel-education">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Education</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('education')"><i class="fas fa-plus"></i> Add Education</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Degree</th><th>Institution</th><th>Years</th><th>Current</th><th>Actions</th></tr></thead>
+          <tbody id="education-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== SKILLS ============== -->
+    <div class="panel" id="panel-skills">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Skills Management</div>
+          <button class="topbar-btn btn-primary" onclick="openSkillGroupModal()"><i class="fas fa-plus"></i> Add Skill Group</button>
+        </div>
+        <div class="card-body" id="skills-admin-container"></div>
+        <div style="padding:16px 20px;border-top:1px solid var(--border);">
+          <button class="topbar-btn btn-primary" onclick="saveSkills()"><i class="fas fa-save"></i> Save Skills</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== CERTIFICATES ============== -->
+    <div class="panel" id="panel-certificates">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Certificates</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div class="search-bar" style="width:220px;"><i class="fas fa-search"></i><input type="text" id="certs-search" placeholder="Search certificates..." oninput="renderCertsTable()" /></div>
+            <button class="topbar-btn btn-primary" onclick="openAddModal('certificates')"><i class="fas fa-plus"></i> Add Certificate</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Name</th><th>Organization</th><th>Category</th><th>Date</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody id="certs-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== PUBLICATIONS ============== -->
+    <div class="panel" id="panel-publications">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Publications</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('publications')"><i class="fas fa-plus"></i> Add Publication</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Title</th><th>Type</th><th>Journal</th><th>Year</th><th>Actions</th></tr></thead>
+          <tbody id="pubs-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== ACHIEVEMENTS ============== -->
+    <div class="panel" id="panel-achievements">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Achievements</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('achievements')"><i class="fas fa-plus"></i> Add Achievement</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Title</th><th>Organization</th><th>Category</th><th>Date</th><th>Featured</th><th>Actions</th></tr></thead>
+          <tbody id="achieve-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== INTERESTS ============== -->
+    <div class="panel" id="panel-interests">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Research Interests</div>
+          <button class="topbar-btn btn-primary" onclick="openAddModal('interests')"><i class="fas fa-plus"></i> Add Interest</button>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Icon</th><th>Title</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody id="interests-table"></tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== SOCIAL ============== -->
+    <div class="panel" id="panel-social">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Social Links</div></div>
+        <div class="card-body" id="social-form-container"></div>
+        <div style="padding:16px 20px;border-top:1px solid var(--border);">
+          <button class="topbar-btn btn-primary" onclick="saveSocial()"><i class="fas fa-save"></i> Save Social Links</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== SETTINGS ============== -->
+    <div class="panel" id="panel-settings">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Website Settings</div></div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Website Title <span class="hint">(browser tab)</span></label>
+              <input type="text" id="settings-title" placeholder="Sarwar Jony | Urban Planning | GIS" />
+            </div>
+            <div class="form-group">
+              <label>Meta Description <span class="hint">(SEO)</span></label>
+              <input type="text" id="settings-desc" placeholder="Urban & Regional Planning Student..." />
+            </div>
+            <div class="form-group">
+              <label>Footer Text</label>
+              <input type="text" id="settings-footer" placeholder="© 2025 Sarwar Jony. All rights reserved." />
+            </div>
+            <div class="form-group">
+              <label>Google Analytics ID <span class="hint">(optional)</span></label>
+              <input type="text" id="settings-analytics" placeholder="G-XXXXXXXXXX" />
+            </div>
+            <div class="form-group">
+              <label>Primary Color</label>
+              <div class="color-swatch">
+                <input type="color" id="settings-primary" value="#2563EB" />
+                <input type="text" id="settings-primary-text" placeholder="#2563EB" style="flex:1;" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Secondary Color</label>
+              <div class="color-swatch">
+                <input type="color" id="settings-secondary" value="#10B981" />
+                <input type="text" id="settings-secondary-text" placeholder="#10B981" style="flex:1;" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Default Theme</label>
+              <select id="settings-theme">
+                <option value="system">System Default</option>
+                <option value="light">Always Light</option>
+                <option value="dark">Always Dark</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Formspree Form ID <span class="hint">(for contact form)</span></label>
+              <input type="text" id="settings-formspree" placeholder="xyzabcde" />
+              <div class="form-hint">Sign up at formspree.io to receive contact form emails. Paste your form ID here.</div>
+            </div>
+          </div>
+          <div style="margin-top:20px;">
+            <button class="topbar-btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============== BACKUP ============== -->
+    <div class="panel" id="panel-backup">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="card">
+          <div class="card-header"><div class="card-title">📤 Export Data</div></div>
+          <div class="card-body">
+            <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;">Export all your portfolio content as a JSON file. Store this file safely — you can use it to restore your data later.</p>
+            <button class="topbar-btn btn-primary" onclick="exportData()" style="width:100%;justify-content:center;">
+              <i class="fas fa-download"></i> Export Portfolio Data
+            </button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">📥 Import Data</div></div>
+          <div class="card-body">
+            <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">Restore your portfolio from a previously exported JSON backup file.</p>
+            <label for="import-file" class="topbar-btn btn-outline" style="cursor:pointer;display:inline-flex;width:100%;justify-content:center;box-sizing:border-box;">
+              <i class="fas fa-upload"></i> Select Backup File
+            </label>
+            <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importData(event)" />
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-header"><div class="card-title">⚠️ Data Management</div></div>
+        <div class="card-body">
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;">
+            <strong>How this works:</strong> All content is stored in your browser's localStorage. This means:
+            <br>• Data stays on your device (no server needed)
+            <br>• Data persists between browser sessions
+            <br>• Clear browser data = data lost (always export backup!)
+            <br>• To use on another device, export and import your backup
+          </p>
+          <button class="topbar-btn btn-danger" onclick="if(confirm('Reset ALL data to defaults? This cannot be undone!')) resetData()">
+            <i class="fas fa-trash"></i> Reset All Data to Default
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end content -->
+</main>
+
+<!-- ITEM MODAL -->
+<div class="modal-overlay" id="item-modal">
+  <div class="modal-box" id="modal-box" style="max-width:760px;">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title-text">Add Item</div>
+      <button class="modal-close" onclick="closeItemModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="modal-form-body"></div>
+    <div class="modal-footer">
+      <button class="topbar-btn btn-outline" onclick="closeItemModal()">Cancel</button>
+      <button class="topbar-btn btn-primary" onclick="saveItem()"><i class="fas fa-save"></i> Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKILL GROUP MODAL -->
+<div class="modal-overlay" id="skill-modal">
+  <div class="modal-box" style="max-width:600px;">
+    <div class="modal-header">
+      <div class="modal-title" id="skill-modal-title">Add Skill Group</div>
+      <button class="modal-close" onclick="closeSkillModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Category Name <span class="required">*</span></label>
+        <input type="text" id="sg-name" placeholder="GIS & Spatial Analysis" />
+      </div>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Icon <span class="hint">(FontAwesome class, e.g. fa-map)</span></label>
+        <input type="text" id="sg-icon" placeholder="fa-map" />
+      </div>
+      <div id="sg-skills-list" style="margin-bottom:14px;"></div>
+      <button class="topbar-btn btn-outline btn-sm" onclick="addSkillRow()"><i class="fas fa-plus"></i> Add Skill</button>
+    </div>
+    <div class="modal-footer">
+      <button class="topbar-btn btn-outline" onclick="closeSkillModal()">Cancel</button>
+      <button class="topbar-btn btn-primary" onclick="saveSkillGroup()"><i class="fas fa-save"></i> Save Group</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA DEFAULTS
+// ============================================================
+const DEFAULTS = {
+  profile: { name:"Sarwar Jony", title:"Urban & Regional Planning Student | GIS & Remote Sensing Enthusiast", tagline:"Aspiring Researcher | Spatial Data & Urban Analytics", bio:"I am a passionate Urban & Regional Planning student at KUET.", bio2:"My research interests center on flood risk assessment, climate resilience, and disaster risk reduction.", photo:"", location:"Khulna, Bangladesh", email:"sarwarjony@kuet.ac.bd", phone:"", university:"KUET", department:"Urban & Regional Planning", linkedin:"#", github:"#", scholar:"#", orcid:"#", researchgate:"#", youtube:"#", facebook:"#", cvUrl:"#" },
+  settings: { siteTitle:"Sarwar Jony | Urban & Regional Planning | GIS", primaryColor:"#2563EB", secondaryColor:"#10B981", footerText:"© 2025 Sarwar Jony. All rights reserved.", darkMode:"system", analyticsId:"", formspreeId:"", metaDesc:"Urban & Regional Planning Student at KUET." },
+  interests: [
+    {id:1,icon:"fa-map",title:"GIS & Spatial Analysis",desc:"Geographic Information Systems for urban and environmental analysis"},
+    {id:2,icon:"fa-satellite",title:"Remote Sensing",desc:"Satellite imagery analysis for land use and environmental monitoring"},
+    {id:3,icon:"fa-water",title:"Flood Risk Assessment",desc:"Spatial modeling of flood hazards and vulnerability mapping"},
+    {id:4,icon:"fa-city",title:"Urban Resilience",desc:"Building climate-resilient cities through data-driven planning"},
+    {id:5,icon:"fa-cloud-sun-rain",title:"Climate Change",desc:"Impact assessment and adaptation strategies for urban areas"},
+    {id:6,icon:"fa-chart-area",title:"Urban Analytics",desc:"Data-driven insights for sustainable urban development"},
+    {id:7,icon:"fa-leaf",title:"Environmental Planning",desc:"Integrating ecological considerations into spatial planning"},
+    {id:8,icon:"fa-shield-halved",title:"Disaster Risk Reduction",desc:"DRR strategies using geospatial technologies"},
+    {id:9,icon:"fa-earth-asia",title:"Sustainable Development",desc:"SDG-aligned urban and regional development planning"}
+  ],
+  projects: [
+    {id:1,title:"Flood Susceptibility Mapping using GIS & Remote Sensing",slug:"flood-susceptibility",category:"GIS",description:"Multi-criteria spatial analysis for flood risk assessment.",tools:["ArcGIS Pro","Google Earth Engine","QGIS","Python"],date:"2024",status:"Completed",featured:true,thumbnail:"",githubUrl:"#",reportUrl:"#",liveUrl:"",tags:["Flood Risk","Spatial Analysis"]},
+    {id:2,title:"Land Use Land Cover Change Detection",slug:"lulc-change",category:"Remote Sensing",description:"Temporal LULC analysis using Landsat imagery.",tools:["Google Earth Engine","QGIS","Python"],date:"2024",status:"Completed",featured:true,thumbnail:"",githubUrl:"#",reportUrl:"#",liveUrl:"",tags:["LULC","Change Detection"]},
+    {id:3,title:"Urban Heat Island Effect Analysis",slug:"urban-heat-island",category:"Urban Planning",description:"Thermal band analysis for UHI and green infrastructure.",tools:["Google Earth Engine","ArcGIS Pro","Python"],date:"2023",status:"Completed",featured:true,thumbnail:"",githubUrl:"#",reportUrl:"#",liveUrl:"",tags:["Urban Heat Island","Climate"]}
+  ],
+  research: [
+    {id:1,title:"Flood Risk Assessment Using Multi-Criteria Decision Analysis and GIS",area:"Flood Risk & Spatial Analysis",description:"GIS-based MCDA to assess flood susceptibility in coastal Bangladesh.",question:"How can GIS-based MCDA generate accurate flood susceptibility maps?",methodology:"MCDA, GIS, AHP",tools:["ArcGIS Pro","Google Earth Engine","Python"],status:"Ongoing",startDate:"2024-01",supervisor:"Add Supervisor Name",keywords:["Flood Risk","GIS","MCDA"],paperUrl:"#",githubUrl:"#"},
+    {id:2,title:"Urban Expansion and Impact on Green Spaces",area:"Urban Growth & Environment",description:"Temporal analysis of urban growth using Landsat time-series data.",question:"What is the rate of green space loss due to urban expansion?",methodology:"Remote Sensing, LULC Change Detection",tools:["Google Earth Engine","QGIS","Python"],status:"Ongoing",startDate:"2023-06",supervisor:"Add Supervisor Name",keywords:["Urban Growth","Green Spaces"],paperUrl:"#",githubUrl:"#"}
+  ],
+  experience: [
+    {id:1,organization:"Khulna University of Engineering & Technology",position:"Research Assistant (GIS Laboratory)",type:"Academic",startDate:"2024-01",endDate:"",current:true,location:"Khulna, Bangladesh",description:"Assisting in GIS-based research projects.",responsibilities:["Conducting GIS data analysis","Processing satellite imagery","Preparing research reports"],skills:["GIS","Remote Sensing","ArcGIS Pro"],websiteUrl:"https://www.kuet.ac.bd"}
+  ],
+  education: [
+    {id:1,institution:"Khulna University of Engineering & Technology (KUET)",degree:"Bachelor of Science (B.Sc.)",program:"Urban & Regional Planning",department:"Department of Urban & Regional Planning",startYear:"2021",endYear:"2025",current:true,cgpa:"",description:"Focused on urban spatial analysis, GIS, remote sensing.",coursework:["GIS & Spatial Analysis","Remote Sensing","Urban Planning","Transportation Planning"],websiteUrl:"https://www.kuet.ac.bd"}
+  ],
+  skills: [
+    {category:"GIS & Spatial Analysis",icon:"fa-map",skills:[{name:"ArcGIS Pro",level:"Advanced"},{name:"QGIS",level:"Advanced"},{name:"Google Earth Engine",level:"Intermediate"}]},
+    {category:"Remote Sensing",icon:"fa-satellite",skills:[{name:"ENVI",level:"Intermediate"},{name:"NDVI Analysis",level:"Advanced"},{name:"Image Classification",level:"Intermediate"}]},
+    {category:"Programming & Data Analysis",icon:"fa-code",skills:[{name:"Python (GIS)",level:"Intermediate"},{name:"GeoPandas",level:"Intermediate"},{name:"Excel",level:"Advanced"}]}
+  ],
+  certificates: [
+    {id:1,name:"GIS for Climate Action",organization:"ESRI",date:"2024-06",category:"GIS",description:"Training on GIS for climate change assessment.",credentialUrl:"#",featured:true,image:"",pdfUrl:""},
+    {id:2,name:"Google Earth Engine for Environmental Monitoring",organization:"Google / Coursera",date:"2024-03",category:"Remote Sensing",description:"Google Earth Engine JavaScript API training.",credentialUrl:"#",featured:true,image:"",pdfUrl:""},
+    {id:3,name:"Python for Everybody",organization:"University of Michigan / Coursera",date:"2023-08",category:"Programming",description:"Comprehensive Python programming course.",credentialUrl:"#",featured:false,image:"",pdfUrl:""}
+  ],
+  publications: [
+    {id:1,title:"Add Your First Publication Title Here",authors:"Jony, S., et al.",journal:"Add Journal/Conference Name",date:"2025",type:"Journal Article",abstract:"Add the abstract of your publication here.",doi:"",paperUrl:"#",pdfUrl:"",scholarUrl:"#",keywords:["Urban Planning","GIS"],status:"Published"}
+  ],
+  achievements: [
+    {id:1,title:"Dean's List Academic Excellence",organization:"KUET",date:"2023-12",category:"Academic",description:"Recognized for outstanding academic performance.",icon:"🏆",featured:true,url:""},
+    {id:2,title:"GIS Mapping Competition — 1st Place",organization:"KUET Department of URP",date:"2024-03",category:"Competition",description:"Won first place in departmental GIS mapping competition.",icon:"🥇",featured:true,url:""}
+  ],
+  social: [
+    {platform:"LinkedIn",url:"#",icon:"fab fa-linkedin",display:true},
+    {platform:"GitHub",url:"#",icon:"fab fa-github",display:true},
+    {platform:"Google Scholar",url:"#",icon:"fas fa-graduation-cap",display:true},
+    {platform:"ResearchGate",url:"#",icon:"fab fa-researchgate",display:true},
+    {platform:"ORCID",url:"#",icon:"fas fa-id-card",display:true},
+    {platform:"YouTube",url:"#",icon:"fab fa-youtube",display:false},
+    {platform:"Facebook",url:"#",icon:"fab fa-facebook",display:false}
+  ]
+};
+
+// ============================================================
+// STORE
+// ============================================================
+const Store = {
+  get(k) { try { const r=localStorage.getItem('portfolio_'+k); return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULTS[k]||[])); } catch(e) { return JSON.parse(JSON.stringify(DEFAULTS[k]||[])); } },
+  set(k,v) { localStorage.setItem('portfolio_'+k,JSON.stringify(v)); },
+  getAll() { return Object.keys(DEFAULTS).reduce((a,k)=>{a[k]=this.get(k);return a;},{}); }
+};
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast');
+  const colors = { success:'background:#ecfdf5;color:#15803d;border:1px solid #bbf7d0;', error:'background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;', info:'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;' };
+  const icons = { success:'fa-check-circle', error:'fa-exclamation-circle', info:'fa-info-circle' };
+  t.style.cssText = `display:flex;position:fixed;top:80px;right:24px;z-index:9999;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:600;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(0,0,0,0.15);min-width:260px;${colors[type]||colors.success}`;
+  t.innerHTML = `<i class="fas ${icons[type]||icons.success}"></i> ${msg}`;
+  t.style.display = 'flex';
+  setTimeout(()=>{ t.style.display='none'; }, 3000);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+const panelTitles = {
+  dashboard: ['Dashboard','Portfolio overview and quick actions'],
+  profile: ['Profile','Edit your personal information'],
+  projects: ['Projects','Manage your GIS & planning projects'],
+  research: ['Research','Manage research projects'],
+  experience: ['Experience','Manage work & academic experience'],
+  education: ['Education','Manage education history'],
+  skills: ['Skills & Tools','Manage skills and competencies'],
+  certificates: ['Certificates','Manage credentials & certifications'],
+  publications: ['Publications','Manage academic publications'],
+  achievements: ['Achievements','Manage awards & accomplishments'],
+  interests: ['Research Interests','Manage research interest areas'],
+  social: ['Social Links','Manage social media profiles'],
+  settings: ['Website Settings','Configure website appearance & SEO'],
+  backup: ['Backup & Export','Export and import portfolio data']
+};
+
+function openPanel(name) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(b=>b.classList.remove('active'));
+  const panel = document.getElementById('panel-'+name);
+  if (panel) panel.classList.add('active');
+  const btn = document.querySelector(`[data-panel="${name}"]`);
+  if (btn) btn.classList.add('active');
+  const [title,sub] = panelTitles[name]||['Admin',''];
+  document.getElementById('topbar-title').textContent = title;
+  document.getElementById('topbar-subtitle').textContent = sub;
+  // Load panel data
+  const loaders = { profile:loadProfileForm, projects:renderProjectsTable, research:renderResearchTable, experience:renderExperienceTable, education:renderEducationTable, skills:renderSkillsAdmin, certificates:renderCertsTable, publications:renderPubsTable, achievements:renderAchieveTable, interests:renderInterestsTable, social:renderSocialForm, settings:loadSettingsForm };
+  if (loaders[name]) loaders[name]();
+}
+
+document.querySelectorAll('.sidebar-item[data-panel]').forEach(btn => {
+  btn.addEventListener('click', () => openPanel(btn.dataset.panel));
+});
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function loadDashboard() {
+  const keys = ['projects','research','experience','education','certificates','publications','achievements'];
+  const icons = { projects:'fa-layer-group', research:'fa-flask', experience:'fa-briefcase', education:'fa-graduation-cap', certificates:'fa-certificate', publications:'fa-book-open', achievements:'fa-trophy' };
+  const colors = { projects:'blue', research:'green', experience:'purple', education:'orange', certificates:'pink', publications:'teal', achievements:'yellow' };
+  const c = document.getElementById('dash-stats');
+  c.innerHTML = keys.map(k => {
+    const data = Store.get(k);
+    const count = Array.isArray(data) ? data.length : 0;
+    return `<div class="stat-card">
+      <div class="stat-icon ${colors[k]||'blue'}"><i class="fas ${icons[k]}"></i></div>
+      <div>
+        <div class="stat-num">${count}</div>
+        <div class="stat-label">${k.charAt(0).toUpperCase()+k.slice(1)}</div>
+      </div>
+    </div>`;
+  }).join('');
+  // Update badges
+  keys.forEach(k => {
+    const b = document.getElementById('badge-'+k) || document.getElementById('badge-certs') || document.getElementById('badge-pubs') || document.getElementById('badge-achieve');
+    const badgeEl = document.getElementById('badge-'+{projects:'projects',research:'research',experience:'experience',education:'education',certificates:'certs',publications:'pubs',achievements:'achieve'}[k]);
+    if (badgeEl) badgeEl.textContent = Array.isArray(Store.get(k)) ? Store.get(k).length : 0;
+  });
+}
+
+// ============================================================
+// PROFILE
+// ============================================================
+function loadProfileForm() {
+  const p = Store.get('profile');
+  const fields = ['name','title','tagline','email','phone','location','bio','bio2','university','department','cvUrl','linkedin','github','scholar','orcid','researchgate','youtube'];
+  fields.forEach(f => { const el=document.getElementById('profile-'+f); if(el) el.value=p[f]||''; });
+  if (p.photo) {
+    const pv = document.getElementById('profile-photo-preview');
+    if (pv) pv.innerHTML = `<img src="${p.photo}" alt="Profile" class="photo-preview" style="width:100%;height:100%;" />`;
+    const pu = document.getElementById('profile-photo-url');
+    if (pu) pu.value = p.photo;
+  }
+}
+
+function saveProfile() {
+  const name = document.getElementById('profile-name').value.trim();
+  const email = document.getElementById('profile-email').value.trim();
+  if (!name) { document.getElementById('profile-name-err').classList.add('show'); return; }
+  document.getElementById('profile-name-err').classList.remove('show');
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('profile-email-err').classList.add('show'); return; }
+  document.getElementById('profile-email-err').classList.remove('show');
+  const photoUrl = document.getElementById('profile-photo-url').value.trim();
+  const p = {
+    name, email,
+    title: document.getElementById('profile-title').value.trim(),
+    tagline: document.getElementById('profile-tagline').value.trim(),
+    phone: document.getElementById('profile-phone').value.trim(),
+    location: document.getElementById('profile-location').value.trim(),
+    bio: document.getElementById('profile-bio').value.trim(),
+    bio2: document.getElementById('profile-bio2').value.trim(),
+    university: document.getElementById('profile-university').value.trim(),
+    department: document.getElementById('profile-department').value.trim(),
+    cvUrl: document.getElementById('profile-cvUrl').value.trim(),
+    photo: photoUrl,
+    linkedin: document.getElementById('profile-linkedin').value.trim(),
+    github: document.getElementById('profile-github').value.trim(),
+    scholar: document.getElementById('profile-scholar').value.trim(),
+    orcid: document.getElementById('profile-orcid').value.trim(),
+    researchgate: document.getElementById('profile-researchgate').value.trim(),
+    youtube: document.getElementById('profile-youtube').value.trim(),
+  };
+  if (photoUrl) {
+    const pv = document.getElementById('profile-photo-preview');
+    if (pv) pv.innerHTML = `<img src="${photoUrl}" alt="Profile" style="width:100%;height:100%;object-fit:cover;" />`;
+  }
+  Store.set('profile', p);
+  showToast('Profile saved successfully!');
+}
+
+// File reader for photo
+document.getElementById('profile-photo-file')?.addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const url = ev.target.result;
+    document.getElementById('profile-photo-url').value = 'data:image (use URL for GitHub Pages)';
+    const pv = document.getElementById('profile-photo-preview');
+    if (pv) pv.innerHTML = `<img src="${url}" alt="Profile" style="width:100%;height:100%;object-fit:cover;" />`;
+    showToast('For GitHub Pages, upload photo to your repo and use the URL instead.', 'info');
+  };
+  reader.readAsDataURL(file);
+});
+
+// ============================================================
+// CURRENT MODAL STATE
+// ============================================================
+let currentModalType = null;
+let currentEditId = null;
+
+// ============================================================
+// GENERIC ITEM MODAL
+// ============================================================
+function openAddModal(type) {
+  currentModalType = type;
+  currentEditId = null;
+  document.getElementById('modal-title-text').textContent = 'Add ' + type.charAt(0).toUpperCase() + type.slice(1, -1);
+  document.getElementById('modal-form-body').innerHTML = getFormHTML(type, null);
+  document.getElementById('item-modal').classList.add('open');
+  initTagInputs();
+}
+
+function openEditModal(type, id) {
+  const data = Store.get(type);
+  const item = data.find(i => i.id === id);
+  if (!item) return;
+  currentModalType = type;
+  currentEditId = id;
+  document.getElementById('modal-title-text').textContent = 'Edit ' + type.charAt(0).toUpperCase() + type.slice(1, -1);
+  document.getElementById('modal-form-body').innerHTML = getFormHTML(type, item);
+  document.getElementById('item-modal').classList.add('open');
+  initTagInputs();
+}
+
+function closeItemModal() {
+  document.getElementById('item-modal').classList.remove('open');
+  currentModalType = null;
+  currentEditId = null;
+}
+
+// ============================================================
+// FORM HTML GENERATORS
+// ============================================================
+function getFormHTML(type, item) {
+  const v = (f, d='') => item ? (item[f] !== undefined ? item[f] : d) : d;
+  const vBool = (f) => item ? item[f] : false;
+  const vArr = (f) => item && Array.isArray(item[f]) ? item[f].join(', ') : '';
+
+  if (type === 'projects') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Title <span class="required">*</span></label><input id="f-title" value="${esc(v('title'))}" placeholder="Project title" /><div class="error-msg" id="f-title-err">Title is required.</div></div>
+      <div class="form-group"><label>Category</label><select id="f-category"><option ${v('category')==='GIS'?'selected':''}>GIS</option><option ${v('category')==='Remote Sensing'?'selected':''}>Remote Sensing</option><option ${v('category')==='Urban Planning'?'selected':''}>Urban Planning</option><option ${v('category')==='Flood Risk'?'selected':''}>Flood Risk</option><option ${v('category')==='Spatial Analysis'?'selected':''}>Spatial Analysis</option><option ${v('category')==='Data Analysis'?'selected':''}>Data Analysis</option><option ${v('category')==='Web GIS'?'selected':''}>Web GIS</option><option ${v('category')==='Research'?'selected':''}>Research</option><option ${v('category')==='Academic Project'?'selected':''}>Academic Project</option></select></div>
+      <div class="form-group"><label>Status</label><select id="f-status"><option ${v('status')==='Completed'?'selected':''}>Completed</option><option ${v('status')==='Ongoing'?'selected':''}>Ongoing</option><option ${v('status')==='Planned'?'selected':''}>Planned</option></select></div>
+      <div class="form-group"><label>Date <span class="hint">(Year or Month-Year)</span></label><input id="f-date" value="${esc(v('date'))}" placeholder="2024" /></div>
+      <div class="form-group full"><label>Short Description <span class="required">*</span></label><textarea id="f-description" rows="3" placeholder="Brief description...">${esc(v('description'))}</textarea></div>
+      <div class="form-group full"><label>Tools/Technologies <span class="hint">(comma separated)</span></label><input id="f-tools" value="${esc(vArr('tools'))}" placeholder="ArcGIS Pro, QGIS, Python" /></div>
+      <div class="form-group full"><label>Tags <span class="hint">(comma separated)</span></label><input id="f-tags" value="${esc(vArr('tags'))}" placeholder="Flood Risk, Spatial Analysis" /></div>
+      <div class="form-group"><label>Thumbnail URL</label><input id="f-thumbnail" value="${esc(v('thumbnail'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>GitHub URL</label><input id="f-githubUrl" value="${esc(v('githubUrl'))}" placeholder="https://github.com/..." /></div>
+      <div class="form-group"><label>Report URL</label><input id="f-reportUrl" value="${esc(v('reportUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>Live Demo URL</label><input id="f-liveUrl" value="${esc(v('liveUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><div class="checkbox-row"><input type="checkbox" id="f-featured" ${vBool('featured')?'checked':''} /><label for="f-featured">⭐ Featured Project</label></div></div>
+    </div>`;
+
+  if (type === 'research') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Research Title <span class="required">*</span></label><input id="f-title" value="${esc(v('title'))}" placeholder="Research title..." /><div class="error-msg" id="f-title-err">Title is required.</div></div>
+      <div class="form-group"><label>Research Area</label><input id="f-area" value="${esc(v('area'))}" placeholder="Flood Risk & Spatial Analysis" /></div>
+      <div class="form-group"><label>Status</label><select id="f-status"><option ${v('status')==='Idea'?'selected':''}>Idea</option><option ${v('status')==='Ongoing'?'selected':''}>Ongoing</option><option ${v('status')==='Under Review'?'selected':''}>Under Review</option><option ${v('status')==='Published'?'selected':''}>Published</option><option ${v('status')==='Completed'?'selected':''}>Completed</option></select></div>
+      <div class="form-group full"><label>Description / Abstract</label><textarea id="f-description" rows="4" placeholder="Describe your research...">${esc(v('description'))}</textarea></div>
+      <div class="form-group full"><label>Research Question</label><textarea id="f-question" rows="2" placeholder="What research question does this address?">${esc(v('question'))}</textarea></div>
+      <div class="form-group"><label>Methodology</label><input id="f-methodology" value="${esc(v('methodology'))}" placeholder="GIS, MCDA, AHP..." /></div>
+      <div class="form-group"><label>Start Date</label><input type="month" id="f-startDate" value="${esc(v('startDate'))}" /></div>
+      <div class="form-group"><label>Supervisor</label><input id="f-supervisor" value="${esc(v('supervisor'))}" placeholder="Prof. Name" /></div>
+      <div class="form-group"><label>Tools/Software <span class="hint">(comma separated)</span></label><input id="f-tools" value="${esc(vArr('tools'))}" placeholder="ArcGIS Pro, QGIS, Python" /></div>
+      <div class="form-group"><label>Keywords <span class="hint">(comma separated)</span></label><input id="f-keywords" value="${esc(vArr('keywords'))}" placeholder="Flood Risk, GIS, Bangladesh" /></div>
+      <div class="form-group"><label>Paper URL</label><input id="f-paperUrl" value="${esc(v('paperUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>GitHub URL</label><input id="f-githubUrl" value="${esc(v('githubUrl'))}" placeholder="https://github.com/..." /></div>
+      <div class="form-group"><label>Dataset URL</label><input id="f-datasetUrl" value="${esc(v('datasetUrl'))}" placeholder="https://..." /></div>
+    </div>`;
+
+  if (type === 'experience') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Position <span class="required">*</span></label><input id="f-position" value="${esc(v('position'))}" placeholder="Research Assistant" /><div class="error-msg" id="f-position-err">Position is required.</div></div>
+      <div class="form-group full"><label>Organization <span class="required">*</span></label><input id="f-organization" value="${esc(v('organization'))}" placeholder="Organization name" /></div>
+      <div class="form-group"><label>Employment Type</label><select id="f-type"><option ${v('type')==='Internship'?'selected':''}>Internship</option><option ${v('type')==='Part-time'?'selected':''}>Part-time</option><option ${v('type')==='Full-time'?'selected':''}>Full-time</option><option ${v('type')==='Volunteer'?'selected':''}>Volunteer</option><option ${v('type')==='Leadership'?'selected':''}>Leadership</option><option ${v('type')==='Academic'?'selected':''}>Academic</option><option ${v('type')==='Research'?'selected':''}>Research</option><option ${v('type')==='Freelance'?'selected':''}>Freelance</option></select></div>
+      <div class="form-group"><label>Location</label><input id="f-location" value="${esc(v('location'))}" placeholder="Khulna, Bangladesh" /></div>
+      <div class="form-group"><label>Start Date</label><input type="month" id="f-startDate" value="${esc(v('startDate'))}" /></div>
+      <div class="form-group"><label>End Date <span class="hint">(leave blank if current)</span></label><input type="month" id="f-endDate" value="${esc(v('endDate'))}" /></div>
+      <div class="form-group"><div class="checkbox-row"><input type="checkbox" id="f-current" ${vBool('current')?'checked':''} /><label for="f-current">Currently Working Here</label></div></div>
+      <div class="form-group full"><label>Description</label><textarea id="f-description" rows="3" placeholder="Brief description of the role...">${esc(v('description'))}</textarea></div>
+      <div class="form-group full"><label>Key Responsibilities <span class="hint">(one per line)</span></label><textarea id="f-responsibilities" rows="4" placeholder="Conducting GIS data analysis&#10;Processing satellite imagery&#10;Preparing research reports">${item&&item.responsibilities?item.responsibilities.join('\n'):''}</textarea></div>
+      <div class="form-group full"><label>Skills Used <span class="hint">(comma separated)</span></label><input id="f-skills" value="${esc(vArr('skills'))}" placeholder="GIS, Remote Sensing, Python" /></div>
+      <div class="form-group full"><label>Organization Website</label><input type="url" id="f-websiteUrl" value="${esc(v('websiteUrl'))}" placeholder="https://..." /></div>
+    </div>`;
+
+  if (type === 'education') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Institution <span class="required">*</span></label><input id="f-institution" value="${esc(v('institution'))}" placeholder="University name" /></div>
+      <div class="form-group"><label>Degree</label><input id="f-degree" value="${esc(v('degree'))}" placeholder="Bachelor of Science (B.Sc.)" /></div>
+      <div class="form-group"><label>Program</label><input id="f-program" value="${esc(v('program'))}" placeholder="Urban & Regional Planning" /></div>
+      <div class="form-group"><label>Department</label><input id="f-department" value="${esc(v('department'))}" placeholder="Department of URP" /></div>
+      <div class="form-group"><label>Start Year</label><input type="number" id="f-startYear" value="${esc(v('startYear'))}" placeholder="2021" min="1990" max="2030" /></div>
+      <div class="form-group"><label>End Year <span class="hint">(leave blank if current)</span></label><input type="number" id="f-endYear" value="${esc(v('endYear'))}" placeholder="2025" min="1990" max="2035" /></div>
+      <div class="form-group"><div class="checkbox-row"><input type="checkbox" id="f-current" ${vBool('current')?'checked':''} /><label for="f-current">Currently Enrolled</label></div></div>
+      <div class="form-group"><label>CGPA / GPA <span class="hint">(optional)</span></label><input id="f-cgpa" value="${esc(v('cgpa'))}" placeholder="3.75 / 4.00" /></div>
+      <div class="form-group full"><label>Description <span class="hint">(optional)</span></label><textarea id="f-description" rows="2" placeholder="Brief description of your studies...">${esc(v('description'))}</textarea></div>
+      <div class="form-group full"><label>Relevant Coursework <span class="hint">(comma separated)</span></label><input id="f-coursework" value="${esc(vArr('coursework'))}" placeholder="GIS, Remote Sensing, Urban Planning" /></div>
+      <div class="form-group full"><label>Institution Website</label><input type="url" id="f-websiteUrl" value="${esc(v('websiteUrl'))}" placeholder="https://..." /></div>
+    </div>`;
+
+  if (type === 'certificates') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Certificate Name <span class="required">*</span></label><input id="f-name" value="${esc(v('name'))}" placeholder="Certificate name" /><div class="error-msg" id="f-name-err">Name is required.</div></div>
+      <div class="form-group"><label>Issuing Organization <span class="required">*</span></label><input id="f-organization" value="${esc(v('organization'))}" placeholder="ESRI, Coursera, NASA..." /></div>
+      <div class="form-group"><label>Category</label><select id="f-category"><option ${v('category')==='GIS'?'selected':''}>GIS</option><option ${v('category')==='Remote Sensing'?'selected':''}>Remote Sensing</option><option ${v('category')==='Programming'?'selected':''}>Programming</option><option ${v('category')==='Research'?'selected':''}>Research</option><option ${v('category')==='Academic'?'selected':''}>Academic</option><option ${v('category')==='Professional'?'selected':''}>Professional</option><option ${v('category')==='Other'?'selected':''}>Other</option></select></div>
+      <div class="form-group"><label>Issue Date</label><input type="month" id="f-date" value="${esc(v('date'))}" /></div>
+      <div class="form-group"><label>Credential ID <span class="hint">(optional)</span></label><input id="f-credentialId" value="${esc(v('credentialId'))}" placeholder="ABC-123-XYZ" /></div>
+      <div class="form-group full"><label>Description</label><textarea id="f-description" rows="2" placeholder="Brief description of what this certificate covers...">${esc(v('description'))}</textarea></div>
+      <div class="form-group"><label>Credential URL <span class="hint">(verification link)</span></label><input type="url" id="f-credentialUrl" value="${esc(v('credentialUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>Certificate Image URL</label><input type="url" id="f-image" value="${esc(v('image'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>PDF URL <span class="hint">(optional)</span></label><input type="url" id="f-pdfUrl" value="${esc(v('pdfUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><div class="checkbox-row"><input type="checkbox" id="f-featured" ${vBool('featured')?'checked':''} /><label for="f-featured">⭐ Featured Certificate</label></div></div>
+    </div>`;
+
+  if (type === 'publications') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Publication Title <span class="required">*</span></label><input id="f-title" value="${esc(v('title'))}" placeholder="Publication title..." /><div class="error-msg" id="f-title-err">Title is required.</div></div>
+      <div class="form-group"><label>Publication Type</label><select id="f-type"><option ${v('type')==='Journal Article'?'selected':''}>Journal Article</option><option ${v('type')==='Conference Paper'?'selected':''}>Conference Paper</option><option ${v('type')==='Book Chapter'?'selected':''}>Book Chapter</option><option ${v('type')==='Preprint'?'selected':''}>Preprint</option><option ${v('type')==='Thesis'?'selected':''}>Thesis</option><option ${v('type')==='Technical Report'?'selected':''}>Technical Report</option></select></div>
+      <div class="form-group"><label>Status</label><select id="f-status"><option ${v('status')==='Published'?'selected':''}>Published</option><option ${v('status')==='Under Review'?'selected':''}>Under Review</option><option ${v('status')==='Preprint'?'selected':''}>Preprint</option><option ${v('status')==='In Press'?'selected':''}>In Press</option></select></div>
+      <div class="form-group full"><label>Authors <span class="hint">(e.g. Jony, S., Ahmed, K., et al.)</span></label><input id="f-authors" value="${esc(v('authors'))}" placeholder="Jony, S., et al." /></div>
+      <div class="form-group"><label>Journal / Conference</label><input id="f-journal" value="${esc(v('journal'))}" placeholder="Journal name or conference" /></div>
+      <div class="form-group"><label>Publication Year</label><input type="number" id="f-date" value="${esc(v('date'))}" placeholder="2025" min="1990" max="2035" /></div>
+      <div class="form-group full"><label>Abstract</label><textarea id="f-abstract" rows="4" placeholder="Abstract of the publication...">${esc(v('abstract'))}</textarea></div>
+      <div class="form-group full"><label>Keywords <span class="hint">(comma separated)</span></label><input id="f-keywords" value="${esc(vArr('keywords'))}" placeholder="GIS, Flood Risk, Bangladesh" /></div>
+      <div class="form-group"><label>DOI</label><input id="f-doi" value="${esc(v('doi'))}" placeholder="10.1234/example" /></div>
+      <div class="form-group"><label>Paper URL</label><input type="url" id="f-paperUrl" value="${esc(v('paperUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>PDF URL</label><input type="url" id="f-pdfUrl" value="${esc(v('pdfUrl'))}" placeholder="https://..." /></div>
+      <div class="form-group"><label>Google Scholar URL</label><input type="url" id="f-scholarUrl" value="${esc(v('scholarUrl'))}" placeholder="https://scholar.google.com/..." /></div>
+    </div>`;
+
+  if (type === 'achievements') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Achievement Title <span class="required">*</span></label><input id="f-title" value="${esc(v('title'))}" placeholder="Achievement title" /><div class="error-msg" id="f-title-err">Title is required.</div></div>
+      <div class="form-group"><label>Organization</label><input id="f-organization" value="${esc(v('organization'))}" placeholder="KUET, BIP..." /></div>
+      <div class="form-group"><label>Category</label><select id="f-category"><option ${v('category')==='Award'?'selected':''}>Award</option><option ${v('category')==='Competition'?'selected':''}>Competition</option><option ${v('category')==='Academic'?'selected':''}>Academic</option><option ${v('category')==='Leadership'?'selected':''}>Leadership</option><option ${v('category')==='Scholarship'?'selected':''}>Scholarship</option><option ${v('category')==='Volunteer'?'selected':''}>Volunteer</option><option ${v('category')==='Other'?'selected':''}>Other</option></select></div>
+      <div class="form-group"><label>Date</label><input type="month" id="f-date" value="${esc(v('date'))}" /></div>
+      <div class="form-group"><label>Icon/Emoji</label><input id="f-icon" value="${esc(v('icon','🏆'))}" placeholder="🏆 🥇 🎖️ 📜 🌟" /></div>
+      <div class="form-group"><div class="checkbox-row"><input type="checkbox" id="f-featured" ${vBool('featured')?'checked':''} /><label for="f-featured">⭐ Featured Achievement</label></div></div>
+      <div class="form-group full"><label>Description</label><textarea id="f-description" rows="3" placeholder="Describe the achievement...">${esc(v('description'))}</textarea></div>
+      <div class="form-group full"><label>URL <span class="hint">(optional)</span></label><input type="url" id="f-url" value="${esc(v('url'))}" placeholder="https://..." /></div>
+    </div>`;
+
+  if (type === 'interests') return `
+    <div class="form-grid">
+      <div class="form-group full"><label>Title <span class="required">*</span></label><input id="f-title" value="${esc(v('title'))}" placeholder="GIS & Spatial Analysis" /></div>
+      <div class="form-group"><label>Icon <span class="hint">(FontAwesome, e.g. fa-map)</span></label><input id="f-icon" value="${esc(v('icon','fa-star'))}" placeholder="fa-map" /></div>
+      <div class="form-group full"><label>Description</label><textarea id="f-desc" rows="2" placeholder="Brief description...">${esc(v('desc'))}</textarea></div>
+    </div>`;
+
+  return '<p style="color:var(--text-muted);">Form not available.</p>';
+}
+
+// ============================================================
+// SAVE ITEM
+// ============================================================
+function saveItem() {
+  if (!currentModalType) return;
+  const type = currentModalType;
+  const data = Store.get(type);
+
+  // Collect form data
+  const item = {};
+  const getVal = (id) => { const el=document.getElementById(id); return el?el.value.trim():''; };
+  const getCheck = (id) => { const el=document.getElementById(id); return el?el.checked:false; };
+  const getArr = (id) => getVal(id).split(',').map(s=>s.trim()).filter(Boolean);
+  const getLines = (id) => getVal(id).split('\n').map(s=>s.trim()).filter(Boolean);
+
+  // Validate required fields
+  let valid = true;
+  const reqFields = { projects:'title', research:'title', experience:'position', education:'institution', certificates:'name', publications:'title', achievements:'title', interests:'title' };
+  const reqId = reqFields[type];
+  if (reqId) {
+    const val = getVal('f-'+reqId);
+    const errEl = document.getElementById('f-'+reqId+'-err');
+    if (!val) { if(errEl) errEl.classList.add('show'); valid=false; }
+    else { if(errEl) errEl.classList.remove('show'); }
+  }
+  if (!valid) return;
+
+  // Build item object by type
+  if (type === 'projects') {
+    Object.assign(item, { title:getVal('f-title'), category:getVal('f-category'), status:getVal('f-status'), date:getVal('f-date'), description:getVal('f-description'), tools:getArr('f-tools'), tags:getArr('f-tags'), thumbnail:getVal('f-thumbnail'), githubUrl:getVal('f-githubUrl'), reportUrl:getVal('f-reportUrl'), liveUrl:getVal('f-liveUrl'), featured:getCheck('f-featured') });
+  } else if (type === 'research') {
+    Object.assign(item, { title:getVal('f-title'), area:getVal('f-area'), status:getVal('f-status'), description:getVal('f-description'), question:getVal('f-question'), methodology:getVal('f-methodology'), startDate:getVal('f-startDate'), supervisor:getVal('f-supervisor'), tools:getArr('f-tools'), keywords:getArr('f-keywords'), paperUrl:getVal('f-paperUrl'), githubUrl:getVal('f-githubUrl'), datasetUrl:getVal('f-datasetUrl') });
+  } else if (type === 'experience') {
+    Object.assign(item, { position:getVal('f-position'), organization:getVal('f-organization'), type:getVal('f-type'), location:getVal('f-location'), startDate:getVal('f-startDate'), endDate:getVal('f-endDate'), current:getCheck('f-current'), description:getVal('f-description'), responsibilities:getLines('f-responsibilities'), skills:getArr('f-skills'), websiteUrl:getVal('f-websiteUrl') });
+  } else if (type === 'education') {
+    Object.assign(item, { institution:getVal('f-institution'), degree:getVal('f-degree'), program:getVal('f-program'), department:getVal('f-department'), startYear:getVal('f-startYear'), endYear:getVal('f-endYear'), current:getCheck('f-current'), cgpa:getVal('f-cgpa'), description:getVal('f-description'), coursework:getArr('f-coursework'), websiteUrl:getVal('f-websiteUrl') });
+  } else if (type === 'certificates') {
+    Object.assign(item, { name:getVal('f-name'), organization:getVal('f-organization'), category:getVal('f-category'), date:getVal('f-date'), credentialId:getVal('f-credentialId'), description:getVal('f-description'), credentialUrl:getVal('f-credentialUrl'), image:getVal('f-image'), pdfUrl:getVal('f-pdfUrl'), featured:getCheck('f-featured') });
+  } else if (type === 'publications') {
+    Object.assign(item, { title:getVal('f-title'), type:getVal('f-type'), status:getVal('f-status'), authors:getVal('f-authors'), journal:getVal('f-journal'), date:getVal('f-date'), abstract:getVal('f-abstract'), keywords:getArr('f-keywords'), doi:getVal('f-doi'), paperUrl:getVal('f-paperUrl'), pdfUrl:getVal('f-pdfUrl'), scholarUrl:getVal('f-scholarUrl') });
+  } else if (type === 'achievements') {
+    Object.assign(item, { title:getVal('f-title'), organization:getVal('f-organization'), category:getVal('f-category'), date:getVal('f-date'), icon:getVal('f-icon')||'🏆', description:getVal('f-description'), featured:getCheck('f-featured'), url:getVal('f-url') });
+  } else if (type === 'interests') {
+    Object.assign(item, { title:getVal('f-title'), icon:getVal('f-icon')||'fa-star', desc:getVal('f-desc') });
+  }
+
+  if (currentEditId !== null) {
+    const idx = data.findIndex(i => i.id === currentEditId);
+    if (idx >= 0) { item.id = currentEditId; data[idx] = item; }
+  } else {
+    const maxId = data.length ? Math.max(...data.map(i=>i.id||0)) : 0;
+    item.id = maxId + 1;
+    data.push(item);
+  }
+
+  Store.set(type, data);
+  closeItemModal();
+
+  // Refresh table
+  const tableRenderers = { projects:renderProjectsTable, research:renderResearchTable, experience:renderExperienceTable, education:renderEducationTable, certificates:renderCertsTable, publications:renderPubsTable, achievements:renderAchieveTable, interests:renderInterestsTable };
+  if (tableRenderers[type]) tableRenderers[type]();
+  updateBadges();
+  showToast('Saved successfully!');
+}
+
+function deleteItem(type, id) {
+  if (!confirm('Delete this item? This cannot be undone.')) return;
+  const data = Store.get(type).filter(i => i.id !== id);
+  Store.set(type, data);
+  const renderers = { projects:renderProjectsTable, research:renderResearchTable, experience:renderExperienceTable, education:renderEducationTable, certificates:renderCertsTable, publications:renderPubsTable, achievements:renderAchieveTable, interests:renderInterestsTable };
+  if (renderers[type]) renderers[type]();
+  updateBadges();
+  showToast('Item deleted.', 'info');
+}
+
+function duplicateItem(type, id) {
+  const data = Store.get(type);
+  const item = data.find(i => i.id === id);
+  if (!item) return;
+  const maxId = Math.max(...data.map(i=>i.id||0));
+  const newItem = {...item, id: maxId+1};
+  if (newItem.title) newItem.title = newItem.title + ' (Copy)';
+  if (newItem.name) newItem.name = newItem.name + ' (Copy)';
+  data.push(newItem);
+  Store.set(type, data);
+  const renderers = { projects:renderProjectsTable, research:renderResearchTable, experience:renderExperienceTable, education:renderEducationTable, certificates:renderCertsTable, publications:renderPubsTable, achievements:renderAchieveTable, interests:renderInterestsTable };
+  if (renderers[type]) renderers[type]();
+  updateBadges();
+  showToast('Item duplicated!');
+}
+
+// ============================================================
+// TABLE RENDERERS
+// ============================================================
+const statusBadge = (s) => { const map={Completed:'badge-green',Ongoing:'badge-blue',Planned:'badge-gray',Idea:'badge-purple','Under Review':'badge-yellow',Published:'badge-green','In Press':'badge-blue'}; return `<span class="badge ${map[s]||'badge-gray'}">${s||''}</span>`; };
+const actionBtns = (type, id) => `<div class="actions"><button class="topbar-btn btn-outline btn-xs" onclick="openEditModal('${type}',${id})"><i class="fas fa-edit"></i></button><button class="topbar-btn btn-outline btn-xs" onclick="duplicateItem('${type}',${id})"><i class="fas fa-copy"></i></button><button class="topbar-btn btn-danger btn-xs" onclick="deleteItem('${type}',${id})"><i class="fas fa-trash"></i></button></div>`;
+
+function renderProjectsTable() {
+  const data = Store.get('projects');
+  const q = document.getElementById('projects-search')?.value.toLowerCase()||'';
+  const filtered = data.filter(p => !q || p.title?.toLowerCase().includes(q));
+  const tbody = document.getElementById('projects-table');
+  if (!tbody) return;
+  if (!filtered.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="fas fa-layer-group"></i><p>No projects yet. Click "Add Project" to get started.</p></div></td></tr>`; return; }
+  tbody.innerHTML = filtered.map(p => `<tr>
+    <td class="td-title">${esc(p.title)}<p>${esc(p.category)} · ${esc(p.date)}</p></td>
+    <td><span class="badge badge-blue">${esc(p.category)}</span></td>
+    <td>${statusBadge(p.status)}</td>
+    <td>${p.featured?'<span class="badge badge-yellow">⭐ Yes</span>':'<span style="color:var(--text-muted);font-size:12px;">No</span>'}</td>
+    <td>${actionBtns('projects',p.id)}</td>
+  </tr>`).join('');
+}
+
+function renderResearchTable() {
+  const data = Store.get('research');
+  const tbody = document.getElementById('research-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><i class="fas fa-flask"></i><p>No research projects yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(r => `<tr>
+    <td class="td-title">${esc(r.title)}<p>${esc(r.area)}</p></td>
+    <td><span style="font-size:12px;color:var(--text-muted);">${esc(r.area)}</span></td>
+    <td>${statusBadge(r.status)}</td>
+    <td>${actionBtns('research',r.id)}</td>
+  </tr>`).join('');
+}
+
+function renderExperienceTable() {
+  const data = Store.get('experience');
+  const tbody = document.getElementById('experience-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="fas fa-briefcase"></i><p>No experience entries yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(e => `<tr>
+    <td class="td-title">${esc(e.position)}<p>${esc(e.location)}</p></td>
+    <td>${esc(e.organization)}</td>
+    <td><span class="badge badge-blue">${esc(e.type)}</span></td>
+    <td>${e.current?'<span class="badge badge-green">Current</span>':'<span style="font-size:12px;color:var(--text-muted);">Ended</span>'}</td>
+    <td>${actionBtns('experience',e.id)}</td>
+  </tr>`).join('');
+}
+
+function renderEducationTable() {
+  const data = Store.get('education');
+  const tbody = document.getElementById('education-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="fas fa-graduation-cap"></i><p>No education entries yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(e => `<tr>
+    <td class="td-title">${esc(e.degree)} in ${esc(e.program)}<p>${esc(e.department)}</p></td>
+    <td>${esc(e.institution)}</td>
+    <td>${esc(e.startYear)} — ${e.current?'Present':esc(e.endYear)}</td>
+    <td>${e.current?'<span class="badge badge-green">Current</span>':statusBadge('Completed')}</td>
+    <td>${actionBtns('education',e.id)}</td>
+  </tr>`).join('');
+}
+
+function renderCertsTable() {
+  const data = Store.get('certificates');
+  const q = document.getElementById('certs-search')?.value.toLowerCase()||'';
+  const filtered = data.filter(c => !q || c.name?.toLowerCase().includes(q) || c.organization?.toLowerCase().includes(q));
+  const tbody = document.getElementById('certs-table');
+  if (!tbody) return;
+  if (!filtered.length) { tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><i class="fas fa-certificate"></i><p>No certificates yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = filtered.map(c => `<tr>
+    <td class="td-title">${esc(c.name)}<p>${esc(c.credentialId)||''}</p></td>
+    <td>${esc(c.organization)}</td>
+    <td><span class="badge badge-blue">${esc(c.category)}</span></td>
+    <td style="font-size:12px;color:var(--text-muted);">${esc(c.date)}</td>
+    <td>${c.featured?'<span class="badge badge-yellow">⭐ Yes</span>':'<span style="color:var(--text-muted);font-size:12px;">No</span>'}</td>
+    <td>${actionBtns('certificates',c.id)}</td>
+  </tr>`).join('');
+}
+
+function renderPubsTable() {
+  const data = Store.get('publications');
+  const tbody = document.getElementById('pubs-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="fas fa-book-open"></i><p>No publications yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(p => `<tr>
+    <td class="td-title">${esc(p.title)}<p>${esc(p.authors)}</p></td>
+    <td><span class="badge badge-green">${esc(p.type)}</span></td>
+    <td style="font-size:12px;color:var(--text-muted);">${esc(p.journal)}</td>
+    <td style="font-size:12px;color:var(--text-muted);">${esc(p.date)}</td>
+    <td>${actionBtns('publications',p.id)}</td>
+  </tr>`).join('');
+}
+
+function renderAchieveTable() {
+  const data = Store.get('achievements');
+  const tbody = document.getElementById('achieve-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><i class="fas fa-trophy"></i><p>No achievements yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(a => `<tr>
+    <td class="td-title">${a.icon||'🏆'} ${esc(a.title)}</td>
+    <td>${esc(a.organization)}</td>
+    <td><span class="badge badge-yellow">${esc(a.category)}</span></td>
+    <td style="font-size:12px;color:var(--text-muted);">${esc(a.date)}</td>
+    <td>${a.featured?'<span class="badge badge-yellow">⭐ Yes</span>':'<span style="color:var(--text-muted);font-size:12px;">No</span>'}</td>
+    <td>${actionBtns('achievements',a.id)}</td>
+  </tr>`).join('');
+}
+
+function renderInterestsTable() {
+  const data = Store.get('interests');
+  const tbody = document.getElementById('interests-table');
+  if (!tbody) return;
+  if (!data.length) { tbody.innerHTML = `<tr><td colspan="4"><div class="empty-state"><i class="fas fa-compass"></i><p>No interests yet.</p></div></td></tr>`; return; }
+  tbody.innerHTML = data.map(item => `<tr>
+    <td><i class="fas ${esc(item.icon||'fa-star')}" style="color:#2563eb;font-size:16px;"></i></td>
+    <td class="td-title">${esc(item.title)}</td>
+    <td style="font-size:13px;color:var(--text-muted);max-width:300px;">${esc(item.desc)}</td>
+    <td>${actionBtns('interests',item.id)}</td>
+  </tr>`).join('');
+}
+
+// ============================================================
+// SKILLS ADMIN
+// ============================================================
+let skillGroupEditIdx = null;
+
+function renderSkillsAdmin() {
+  const skills = Store.get('skills');
+  const container = document.getElementById('skills-admin-container');
+  if (!container) return;
+  if (!skills.length) {
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-tools"></i><p>No skill groups yet. Click "Add Skill Group" above.</p></div>';
+    return;
+  }
+  container.innerHTML = skills.map((group, i) => `
+    <div style="margin-bottom:20px;padding:16px;border:1.5px solid var(--border);border-radius:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <i class="fas ${group.icon||'fa-star'}" style="color:#2563eb;"></i>
+          <strong style="font-size:14px;">${esc(group.category)}</strong>
+          <span class="badge badge-gray">${group.skills.length} skills</span>
+        </div>
+        <div class="actions">
+          <button class="topbar-btn btn-outline btn-xs" onclick="editSkillGroup(${i})"><i class="fas fa-edit"></i></button>
+          <button class="topbar-btn btn-danger btn-xs" onclick="deleteSkillGroup(${i})"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
+        ${group.skills.map(s => `<span style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:50px;background:#eff6ff;color:#2563eb;font-size:12px;font-weight:600;">${esc(s.name)} <span style="font-weight:400;color:#64748b;">(${esc(s.level)})</span></span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function openSkillGroupModal(idx=null) {
+  skillGroupEditIdx = idx;
+  const skills = Store.get('skills');
+  const group = idx !== null ? skills[idx] : null;
+  document.getElementById('skill-modal-title').textContent = idx !== null ? 'Edit Skill Group' : 'Add Skill Group';
+  document.getElementById('sg-name').value = group ? group.category : '';
+  document.getElementById('sg-icon').value = group ? group.icon : '';
+  document.getElementById('sg-skills-list').innerHTML = '';
+  if (group) { group.skills.forEach(s => addSkillRow(s.name, s.level)); }
+  else { addSkillRow(); }
+  document.getElementById('skill-modal').classList.add('open');
+}
+
+function closeSkillModal() { document.getElementById('skill-modal').classList.remove('open'); skillGroupEditIdx = null; }
+
+function editSkillGroup(idx) { openSkillGroupModal(idx); }
+
+function deleteSkillGroup(idx) {
+  if (!confirm('Delete this skill group?')) return;
+  const skills = Store.get('skills');
+  skills.splice(idx, 1);
+  Store.set('skills', skills);
+  renderSkillsAdmin();
+  showToast('Skill group deleted.', 'info');
+}
+
+function addSkillRow(name='', level='Intermediate') {
+  const list = document.getElementById('sg-skills-list');
+  const row = document.createElement('div');
+  row.style.cssText = 'display:grid;grid-template-columns:1fr 140px 36px;gap:8px;margin-bottom:8px;align-items:center;';
+  row.innerHTML = `
+    <input placeholder="Skill name (e.g. ArcGIS Pro)" value="${esc(name)}" class="skill-name-input" />
+    <select class="skill-level-input">
+      <option ${level==='Beginner'?'selected':''}>Beginner</option>
+      <option ${level==='Intermediate'?'selected':''}>Intermediate</option>
+      <option ${level==='Advanced'?'selected':''}>Advanced</option>
+      <option ${level==='Expert'?'selected':''}>Expert</option>
+    </select>
+    <button type="button" style="padding:8px;border-radius:6px;border:1.5px solid var(--border);background:var(--danger-light);color:var(--danger);cursor:pointer;" onclick="this.closest('div').remove()"><i class="fas fa-times"></i></button>
+  `;
+  list.appendChild(row);
+}
+
+function saveSkillGroup() {
+  const name = document.getElementById('sg-name').value.trim();
+  if (!name) { showToast('Category name is required.', 'error'); return; }
+  const icon = document.getElementById('sg-icon').value.trim() || 'fa-star';
+  const rows = document.querySelectorAll('#sg-skills-list > div');
+  const skillItems = [];
+  rows.forEach(row => {
+    const n = row.querySelector('.skill-name-input')?.value.trim();
+    const l = row.querySelector('.skill-level-input')?.value;
+    if (n) skillItems.push({ name:n, level:l });
+  });
+  const skills = Store.get('skills');
+  const group = { category:name, icon, skills:skillItems };
+  if (skillGroupEditIdx !== null) { skills[skillGroupEditIdx] = group; }
+  else { skills.push(group); }
+  Store.set('skills', skills);
+  closeSkillModal();
+  renderSkillsAdmin();
+  showToast('Skill group saved!');
+}
+
+function saveSkills() { showToast('Skills are auto-saved when you modify groups!', 'info'); }
+
+// ============================================================
+// SOCIAL FORM
+// ============================================================
+function renderSocialForm() {
+  const social = Store.get('social');
+  const container = document.getElementById('social-form-container');
+  if (!container) return;
+  container.innerHTML = social.map((s, i) => `
+    <div style="display:grid;grid-template-columns:36px 140px 1fr 120px;gap:10px;align-items:center;margin-bottom:12px;">
+      <i class="${s.icon}" style="font-size:18px;text-align:center;color:#64748b;"></i>
+      <div style="font-size:13px;font-weight:600;color:var(--text);">${s.platform}</div>
+      <input value="${esc(s.url)}" placeholder="https://..." id="social-url-${i}" />
+      <div class="checkbox-row">
+        <input type="checkbox" id="social-display-${i}" ${s.display?'checked':''} />
+        <label for="social-display-${i}" style="font-size:13px;">Show</label>
+      </div>
+    </div>
+  `).join('');
+}
+
+function saveSocial() {
+  const social = Store.get('social');
+  social.forEach((s, i) => {
+    s.url = document.getElementById('social-url-'+i)?.value.trim() || s.url;
+    s.display = document.getElementById('social-display-'+i)?.checked ?? s.display;
+  });
+  Store.set('social', social);
+  showToast('Social links saved!');
+}
+
+// ============================================================
+// SETTINGS FORM
+// ============================================================
+function loadSettingsForm() {
+  const s = Store.get('settings');
+  const fields = ['title','footer','analytics','formspree'];
+  fields.forEach(f => { const el=document.getElementById('settings-'+f); if(el) el.value=s[f.replace('title','siteTitle').replace('footer','footerText').replace('analytics','analyticsId').replace('formspree','formspreeId')]||s[f]||''; });
+  document.getElementById('settings-title').value = s.siteTitle||'';
+  document.getElementById('settings-footer').value = s.footerText||'';
+  document.getElementById('settings-analytics').value = s.analyticsId||'';
+  document.getElementById('settings-formspree').value = s.formspreeId||'';
+  if (document.getElementById('settings-desc')) document.getElementById('settings-desc').value = s.metaDesc||'';
+  if (document.getElementById('settings-theme')) document.getElementById('settings-theme').value = s.darkMode||'system';
+  const pc = document.getElementById('settings-primary'); if(pc) pc.value = s.primaryColor||'#2563EB';
+  const pct = document.getElementById('settings-primary-text'); if(pct) pct.value = s.primaryColor||'#2563EB';
+  const sc = document.getElementById('settings-secondary'); if(sc) sc.value = s.secondaryColor||'#10B981';
+  const sct = document.getElementById('settings-secondary-text'); if(sct) sct.value = s.secondaryColor||'#10B981';
+  // Sync color pickers
+  document.getElementById('settings-primary')?.addEventListener('input', e => { document.getElementById('settings-primary-text').value = e.target.value; });
+  document.getElementById('settings-secondary')?.addEventListener('input', e => { document.getElementById('settings-secondary-text').value = e.target.value; });
+}
+
+function saveSettings() {
+  const s = {
+    siteTitle: document.getElementById('settings-title').value.trim(),
+    footerText: document.getElementById('settings-footer').value.trim(),
+    analyticsId: document.getElementById('settings-analytics').value.trim(),
+    formspreeId: document.getElementById('settings-formspree').value.trim(),
+    metaDesc: document.getElementById('settings-desc')?.value.trim()||'',
+    darkMode: document.getElementById('settings-theme')?.value||'system',
+    primaryColor: document.getElementById('settings-primary-text')?.value||'#2563EB',
+    secondaryColor: document.getElementById('settings-secondary-text')?.value||'#10B981',
+  };
+  Store.set('settings', s);
+  showToast('Settings saved!');
+}
+
+// ============================================================
+// BACKUP / EXPORT / IMPORT
+// ============================================================
+function exportData() {
+  const data = Store.getAll ? Store.getAll() : {};
+  if (!data.profile) {
+    Object.keys(DEFAULTS).forEach(k => data[k] = Store.get(k));
+  }
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `portfolio-backup-${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+  showToast('Data exported successfully!');
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!confirm('Import will replace ALL current data. Continue?')) return;
+      Object.keys(DEFAULTS).forEach(k => { if (data[k] !== undefined) Store.set(k, data[k]); });
+      showToast('Data imported successfully! Refresh to see changes.', 'success');
+      loadDashboard();
+    } catch(err) {
+      showToast('Invalid backup file. Please use a valid JSON export.', 'error');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function resetData() {
+  Object.keys(DEFAULTS).forEach(k => Store.set(k, JSON.parse(JSON.stringify(DEFAULTS[k]))));
+  showToast('Data reset to defaults!', 'info');
+  loadDashboard();
+}
+
+// ============================================================
+// UTILITY
+// ============================================================
+function esc(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function initTagInputs() {}
+
+function saveCurrentPanel() {
+  const active = document.querySelector('.panel.active');
+  if (!active) return;
+  const id = active.id.replace('panel-','');
+  const savers = { profile:saveProfile, social:saveSocial, settings:saveSettings, skills:saveSkills };
+  if (savers[id]) savers[id]();
+  else showToast('Use the Save button in the form!', 'info');
+}
+
+function updateBadges() {
+  const map = { projects:'projects', research:'research', experience:'experience', education:'education', certificates:'certs', publications:'pubs', achievements:'achieve' };
+  Object.entries(map).forEach(([k,badge]) => {
+    const el = document.getElementById('badge-'+badge);
+    if (el) el.textContent = Store.get(k).length;
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  loadDashboard();
+  updateBadges();
+});
+</script>
+</body>
+</html>

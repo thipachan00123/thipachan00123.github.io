@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "institution": "Khulna University of Engineering & Technology (KUET)",
+    "degree": "Bachelor of Science (B.Sc.)",
+    "program": "Urban & Regional Planning",
+    "department": "Department of Urban & Regional Planning",
+    "startYear": "2021",
+    "endYear": "2025",
+    "current": true,
+    "cgpa": "Add your CGPA",
+    "description": "Focused on urban spatial analysis, GIS, remote sensing, transportation planning, and environmental planning. Active in research activities and departmental organizations.",
+    "coursework": [
+      "GIS & Spatial Analysis",
+      "Remote Sensing & Image Analysis",
+      "Urban Planning Theory",
+      "Transportation Planning",
+      "Environmental Planning",
+      "Urban Economics",
+      "Research Methodology",
+      "Land Use Planning",
+      "Urban Housing",
+      "Regional Planning"
+    ],
+    "activities": [
+      "Urban Planning Club — Executive Member",
+      "Research Assistant — GIS Laboratory",
+      "Bangladesh Institute of Planners — Student Member"
+    ],
+    "logo": "",
+    "websiteUrl": "https://www.kuet.ac.bd"
+  }
+]

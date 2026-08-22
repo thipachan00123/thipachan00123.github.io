@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Add Your First Publication Title Here",
+    "authors": "Jony, S., et al.",
+    "journal": "Add Journal or Conference Name",
+    "date": "2025",
+    "type": "Journal Article",
+    "abstract": "Add the abstract of your publication here. This is a placeholder for your first publication. Replace this with your actual abstract text once you have a published or submitted paper.",
+    "keywords": ["Urban Planning", "GIS", "Remote Sensing", "Bangladesh"],
+    "doi": "",
+    "paperUrl": "#",
+    "pdfUrl": "",
+    "scholarUrl": "#",
+    "citation": "",
+    "status": "Published"
+  }
+]
